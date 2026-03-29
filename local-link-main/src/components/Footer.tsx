@@ -11,7 +11,7 @@ const Footer = () => {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <MapPin className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-display text-lg font-bold text-secondary-foreground">Serafix</span>
+              <span className="font-display text-lg font-bold text-secondary-foreground">mrNibras</span>
             </Link>
             <p className="text-sm leading-relaxed">
               Connecting local service providers with customers across Ethiopia. Quality services at your fingertips.
@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-secondary-foreground/10 pt-8 text-sm text-center">
-          © {new Date().getFullYear()} Serafix. All rights reserved.
+          © {new Date().getFullYear()} mrNibras Local Market. All rights reserved.
         </div>
       </div>
     </footer>

@@ -13,7 +13,7 @@ const HowItWorks = () => {
         >
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Simple Process</p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-            How Serafix Works
+            How mrNibras Works
           </h2>
         </motion.div>
 

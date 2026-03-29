@@ -14,7 +14,7 @@ const Navbar = () => {
             <MapPin className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="font-display text-xl font-bold text-foreground">
-            Serafix
+            mrNibras
           </span>
         </Link>
 
