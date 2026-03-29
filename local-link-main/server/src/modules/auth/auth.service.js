@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import envVars from '../../config/env.js';
 import * as userRepository from '../users/user.repository.js';
-import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from './auth.utils.js';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken, verifyAccessToken } from './auth.utils.js';
 import { NotFoundError, BadRequestError, ConflictError, UnauthorizedError } from '../../shared/middleware/error.middleware.js';
 import logger from '../../shared/utils/logger.js';
 
@@ -287,11 +287,8 @@ export const resetPassword = async (email, code, newPassword) => {
 };
 
 /**
- * Verify access token
+ * Verify access token (exported for use in middleware)
  * @param {string} token - Access token
  * @returns {Object} Decoded token
  */
-export const verifyAccessToken = (token) => {
-  const { verifyAccessToken: verify } = await import('./auth.utils.js');
-  return verify(token);
-};
+export { verifyAccessToken };

@@ -8,12 +8,13 @@ const router = express.Router();
 // Public routes
 router.post('/login', loginValidator, authController.login);
 router.post('/register', registerValidator, authController.register);
+router.post('/refresh', authController.refreshToken);
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
 
 // Protected routes
-router.post('/refresh', protect, authController.refreshToken);
 router.post('/logout', protect, authController.logout);
+router.post('/logout-all', protect, authController.logoutAll);
 router.get('/me', protect, authController.getCurrentUser);
 
 // Debug/test route (remove in production)
