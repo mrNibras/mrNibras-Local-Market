@@ -1,6 +1,6 @@
-import { asyncHandler } from '../../shared/middleware/error.middleware.js';
 import * as authService from './auth.service.js';
-import { loginValidator } from '../../shared/utils/validators.js';
+import { loginValidator, registerValidator } from '../../shared/utils/validators.js';
+import { asyncHandler } from '../../shared/middleware/error.middleware.js';
 import logger from '../../shared/utils/logger.js';
 
 /**
@@ -34,10 +34,14 @@ export const register = asyncHandler(async (req, res) => {
   const userData = req.body;
 
   // Register user
-  const user = await authService.authService.register(userData);
+  const user = await authService.register(userData);
   
-  // Generate token
-  const token = authService.generateToken(user);
+  // Generate tokens
+  const accessToken = authService.generateAccessToken(user);
+  const refreshToken = authService.generateRefreshToken(user);
+  
+  // Store refresh token in database
+  await authService.storeRefreshToken(user.id, refreshToken);
 
   logger.info(`User registered and logged in: ${user.email}`);
 
@@ -46,28 +50,30 @@ export const register = asyncHandler(async (req, res) => {
     message: 'Registration successful',
     data: {
       user,
-      token,
-      expiresIn: process.env.JWT_EXPIRE || '30d'
+      accessToken,
+      refreshToken,
+      expiresIn: '15m',
+      refreshExpiresIn: '7d'
     }
   });
 });
 
 /**
- * Refresh token
+ * Refresh access token
  * POST /api/auth/refresh
  */
 export const refreshToken = asyncHandler(async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
+  const { refreshToken } = req.body;
 
-  if (!token) {
-    return res.status(401).json({
+  if (!refreshToken) {
+    return res.status(400).json({
       success: false,
-      message: 'No token provided',
-      errorCode: 'NO_TOKEN'
+      message: 'Refresh token is required',
+      errorCode: 'MISSING_TOKEN'
     });
   }
 
-  const result = await authService.refreshToken(token);
+  const result = await authService.refreshAccessToken(refreshToken);
 
   res.status(200).json({
     success: true,
@@ -77,15 +83,32 @@ export const refreshToken = asyncHandler(async (req, res) => {
 });
 
 /**
- * Logout user
+ * Logout user (invalidate refresh token)
  * POST /api/auth/logout
  */
 export const logout = asyncHandler(async (req, res) => {
   await authService.logout(req.user.id);
 
+  logger.info(`User logged out: ${req.user.email}`);
+
   res.status(200).json({
     success: true,
     message: 'Logout successful'
+  });
+});
+
+/**
+ * Logout from all devices (invalidate all refresh tokens)
+ * POST /api/auth/logout-all
+ */
+export const logoutAll = asyncHandler(async (req, res) => {
+  await authService.logoutAll(req.user.id);
+
+  logger.info(`User logged out from all devices: ${req.user.email}`);
+
+  res.status(200).json({
+    success: true,
+    message: 'Logged out from all devices successfully'
   });
 });
 
@@ -146,10 +169,16 @@ export const verifyToken = asyncHandler(async (req, res) => {
     });
   }
 
-  const decoded = authService.verifyToken(token);
-
-  res.status(200).json({
-    success: true,
-    data: decoded
-  });
+  try {
+    const decoded = authService.verifyAccessToken(token);
+    res.status(200).json({
+      success: true,
+      data: decoded
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: error.message
+    });
+  }
 });

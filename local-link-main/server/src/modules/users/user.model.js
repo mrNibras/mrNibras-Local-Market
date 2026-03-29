@@ -72,6 +72,29 @@ const userSchema = new mongoose.Schema({
     license: String,
     yearsOfExperience: Number,
     specialties: [String]
+  },
+
+  // Refresh token for session management
+  refreshToken: {
+    type: String,
+    select: false
+  },
+
+  // Token expiry tracking
+  refreshTokenExpiresAt: {
+    type: Date,
+    select: false
+  },
+
+  // Password reset fields
+  passwordResetCode: {
+    type: String,
+    select: false
+  },
+
+  passwordResetExpires: {
+    type: Date,
+    select: false
   }
 }, {
   timestamps: true,
