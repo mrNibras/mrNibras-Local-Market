@@ -1,12 +1,12 @@
 import winston from 'winston';
-import envVars from '../config/env.js';
+import envVars from '../../config/env.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const logDir = path.join(__dirname, '../../logs');
+const logDir = path.join(__dirname, '../../../logs');
 
 const { combine, timestamp, printf, colorize, errors } = winston.format;
 

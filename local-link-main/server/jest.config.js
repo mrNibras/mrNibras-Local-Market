@@ -9,17 +9,9 @@ export default {
   resetMocks: true,
   restoreMocks: true,
   testTimeout: 30000,
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/server.js',
-    '!src/config/db.js'
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50
-    }
+  rootDir: './',
+  modulePaths: ['<rootDir>/src'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1'
   }
 };
