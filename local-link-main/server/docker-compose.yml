@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # MongoDB Service
+  mongodb:
+    image: mongo:7
+    container_name: local-link-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpassword
+      MONGO_INITDB_DATABASE: local-link
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - local-link-network
+
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: local-link-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: mongodb://admin:adminpassword@mongodb:27017/local-link?authSource=admin
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+      JWT_EXPIRE: 30d
+      JWT_ISSUER: local-link-api
+      BCRYPT_ROUNDS: 12
+      RATE_LIMIT_WINDOW_MS: 900000
+      RATE_LIMIT_MAX_REQUESTS: 100
+      CORS_ORIGIN: http://localhost:5173
+      LOG_LEVEL: info
+      API_PREFIX: /api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    networks:
+      - local-link-network
+    volumes:
+      - ./logs:/app/logs
+
+  # Frontend (Optional - if you want to serve frontend from same container)
+  # frontend:
+  #   build:
+  #     context: ../
+  #     dockerfile: Dockerfile
+  #   container_name: local-link-frontend
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - local-link-network
+
+volumes:
+  mongodb_data:
+  mongodb_config:
+
+networks:
+  local-link-network:
+    driver: bridge
