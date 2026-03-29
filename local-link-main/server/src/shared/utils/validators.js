@@ -190,6 +190,15 @@ export const createBookingValidator = [
       return true;
     }),
   
+  body('duration')
+    .optional()
+    .isInt({ min: 15, max: 480 }).withMessage('Duration must be between 15 and 480 minutes'),
+  
+  body('note')
+    .optional()
+    .trim()
+    .isLength({ max: 1000 }).withMessage('Note cannot exceed 1000 characters'),
+  
   validate
 ];
 

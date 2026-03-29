@@ -15,7 +15,7 @@ import logger from '../../shared/utils/logger.js';
  * @returns {Promise<Object>}
  */
 export const createBooking = async (bookingData, customerId) => {
-  const { provider, service: serviceId, bookingDate } = bookingData;
+  const { provider, service: serviceId, bookingDate, duration = 60 } = bookingData;
 
   // Verify service exists and get details
   const service = await serviceRepository.findById(serviceId);
@@ -28,17 +28,29 @@ export const createBooking = async (bookingData, customerId) => {
     throw new BadRequestError('Provider does not match service provider', 'PROVIDER_MISMATCH');
   }
 
-  // Check for double booking
-  const isAvailable = await bookingRepository.checkDoubleBooking(provider, bookingDate);
-  if (!isAvailable) {
+  // Calculate start and end times
+  const start = new Date(bookingDate);
+  const end = new Date(start.getTime() + duration * 60000);
+
+  // Check for time conflicts using advanced overlap detection
+  const hasConflict = await checkTimeConflict(provider, start, end);
+  if (hasConflict) {
     throw new ConflictError('Time slot already booked', 'SLOT_UNAVAILABLE');
+  }
+
+  // Check availability if provider has set availability
+  const isAvailable = await checkAvailability(provider, start, end);
+  if (!isAvailable) {
+    throw new ConflictError('Time slot outside provider availability', 'OUTSIDE_AVAILABILITY');
   }
 
   // Create booking
   const booking = await bookingRepository.createBooking({
     ...bookingData,
     customer: customerId,
-    price: service.price
+    price: service.price,
+    endTime: end,
+    duration
   });
 
   // Populate booking with related data
@@ -53,6 +65,86 @@ export const createBooking = async (bookingData, customerId) => {
   logger.info(`Booking created: ${booking._id} by customer ${customerId}`);
 
   return populatedBooking;
+};
+
+/**
+ * Check for time conflicts (overlapping bookings)
+ * @param {string} providerId - Provider ID
+ * @param {Date} start - Start time
+ * @param {Date} end - End time
+ * @returns {Promise<boolean>}
+ */
+const checkTimeConflict = async (providerId, start, end) => {
+  const conflict = await Booking.findOne({
+    provider: providerId,
+    status: { $in: ['pending', 'accepted'] },
+    bookingDate: { $lt: end },
+    $expr: {
+      $gt: [
+        { $add: ['$bookingDate', { $multiply: [{ $ifNull: ['$duration', 60] }, 60000] }] },
+        start
+      ]
+    }
+  });
+
+  return !!conflict;
+};
+
+/**
+ * Check if slot is within provider availability
+ * @param {string} providerId - Provider ID
+ * @param {Date} start - Start time
+ * @param {Date} end - End time
+ * @returns {Promise<boolean>}
+ */
+const checkAvailability = async (providerId, start, end) => {
+  try {
+    const Availability = (await import('../availability/availability.model.js')).default;
+    
+    const availability = await Availability.findOne({
+      provider: providerId,
+      isActive: true
+    });
+
+    if (!availability) {
+      // No availability set, allow booking (flexible providers)
+      return true;
+    }
+
+    // Check if slot falls within any defined availability slot
+    const dayOfWeek = start.getDay();
+    const dayAvailability = await Availability.findOne({
+      provider: providerId,
+      dayOfWeek,
+      isActive: true,
+      isException: false
+    });
+
+    if (!dayAvailability) {
+      // No availability for this day of week
+      return false;
+    }
+
+    // Check if time falls within any slot
+    const startMinutes = start.getHours() * 60 + start.getMinutes();
+    const endMinutes = end.getHours() * 60 + end.getMinutes();
+
+    const isValidSlot = dayAvailability.slots.some(slot => {
+      const [slotStartHour, slotStartMin] = slot.startTime.split(':').map(Number);
+      const [slotEndHour, slotEndMin] = slot.endTime.split(':').map(Number);
+      
+      const slotStartMinutes = slotStartHour * 60 + slotStartMin;
+      const slotEndMinutes = slotEndHour * 60 + slotEndMin;
+
+      return startMinutes >= slotStartMinutes && endMinutes <= slotEndMinutes && !slot.isBooked;
+    });
+
+    return isValidSlot;
+  } catch (error) {
+    // If availability module fails, allow booking (graceful degradation)
+    logger.warn(`Availability check failed: ${error.message}`);
+    return true;
+  }
 };
 
 /**
@@ -155,7 +247,7 @@ export const acceptBooking = async (bookingId, providerId) => {
     throw new ForbiddenError('You can only manage your own bookings', 'NOT_AUTHORIZED');
   }
 
-  // Check if booking can be accepted
+  // State machine: only pending bookings can be accepted
   if (booking.status !== 'pending') {
     throw new BadRequestError(`Cannot accept booking with status: ${booking.status}`, 'INVALID_STATUS');
   }
@@ -182,7 +274,7 @@ export const rejectBooking = async (bookingId, providerId, reason = null) => {
     throw new ForbiddenError('You can only manage your own bookings', 'NOT_AUTHORIZED');
   }
 
-  // Check if booking can be rejected
+  // State machine: only pending bookings can be rejected
   if (booking.status !== 'pending') {
     throw new BadRequestError(`Cannot reject booking with status: ${booking.status}`, 'INVALID_STATUS');
   }
@@ -212,9 +304,14 @@ export const cancelBooking = async (bookingId, userId, reason = null) => {
     throw new ForbiddenError('You can only cancel your own bookings', 'NOT_AUTHORIZED');
   }
 
-  // Check if booking can be cancelled
+  // State machine: only pending/accepted can be cancelled
   if (!booking.canBeCancelled()) {
     throw new BadRequestError(`Cannot cancel booking with status: ${booking.status}`, 'INVALID_STATUS');
+  }
+
+  // Additional check: customer can only cancel their own
+  if (!isCustomer && !isProvider) {
+    throw new ForbiddenError('Unauthorized to cancel this booking', 'NOT_AUTHORIZED');
   }
 
   const updatedBooking = await bookingRepository.cancelBooking(bookingId, reason);
@@ -238,7 +335,7 @@ export const completeBooking = async (bookingId, providerId) => {
     throw new ForbiddenError('You can only manage your own bookings', 'NOT_AUTHORIZED');
   }
 
-  // Check if booking can be completed
+  // State machine: only accepted bookings can be completed
   if (!booking.canBeCompleted()) {
     throw new BadRequestError(`Cannot complete booking with status: ${booking.status}`, 'INVALID_STATUS');
   }

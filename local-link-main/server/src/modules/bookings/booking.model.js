@@ -30,11 +30,23 @@ const bookingSchema = new mongoose.Schema({
     type: Date
   },
 
+  duration: {
+    type: Number, // minutes
+    default: 60,
+    min: [15, 'Minimum booking duration is 15 minutes'],
+    max: [480, 'Maximum booking duration is 8 hours']
+  },
+
   status: {
     type: String,
     enum: ['pending', 'accepted', 'rejected', 'completed', 'cancelled'],
     default: 'pending',
     index: true
+  },
+
+  note: {
+    type: String,
+    maxlength: [1000, 'Note cannot exceed 1000 characters']
   },
 
   notes: {
