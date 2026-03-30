@@ -1,41 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
-export interface ServiceWithRating {
-  id: string;
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+export interface Service {
+  _id: string;
   title: string;
   description: string;
   price: number;
-  location: string;
-  is_active: boolean;
-  category_name: string;
-  category_icon: string;
-  category_color: string;
-  provider_name: string;
-  provider_avatar: string | null;
-  avg_rating: number;
-  review_count: number;
-  provider_id: string;
-  category_id: string;
-  created_at: string;
+  category: string;
+  averageRating: number;
+  totalReviews: number;
+  provider: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  location: {
+    type: string;
+    coordinates: number[];
+  };
+  isActive: boolean;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
 }
 
 export function useServices(category?: string, query?: string) {
   return useQuery({
     queryKey: ["services", category, query],
     queryFn: async () => {
-      let q = supabase.from("services_with_rating").select("*");
-
-      if (category) {
-        q = q.eq("category_name", category);
+      let url = `${API_URL}/services`;
+      const params = new URLSearchParams();
+      
+      if (category) params.append('category', category);
+      if (query) params.append('search', query);
+      
+      if (params.toString()) {
+        url += `?${params.toString()}`;
       }
-      if (query) {
-        q = q.or(`title.ilike.%${query}%,description.ilike.%${query}%`);
-      }
 
-      const { data, error } = await q.order("avg_rating", { ascending: false });
-      if (error) throw error;
-      return data as ServiceWithRating[];
+      const response = await fetch(url);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to fetch services');
+      }
+      
+      const data = await response.json();
+      return data.data || [];
     },
   });
 }
@@ -44,13 +59,14 @@ export function useService(id: string) {
   return useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("services_with_rating")
-        .select("*")
-        .eq("id", id)
-        .single();
-      if (error) throw error;
-      return data as ServiceWithRating;
+      const response = await fetch(`${API_URL}/services/${id}`);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to fetch service');
+      }
+      
+      const data = await response.json();
+      return data.data;
     },
     enabled: !!id,
   });
@@ -60,12 +76,44 @@ export function useCategories() {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("categories")
-        .select("*")
-        .order("name");
-      if (error) throw error;
-      return data;
+      const response = await fetch(`${API_URL}/services/categories`);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to fetch categories');
+      }
+      
+      const data = await response.json();
+      
+      // Transform backend categories to frontend format
+      const categoryIcons: Record<string, string> = {
+        plumbing: 'Wrench',
+        electrical: 'Zap',
+        cleaning: 'Sparkles',
+        tutoring: 'Book',
+        painting: 'Paintbrush',
+        carpentry: 'Hammer',
+        gardening: 'Flower',
+        moving: 'Truck'
+      };
+      
+      const categoryColors: Record<string, string> = {
+        plumbing: '#3b82f6',
+        electrical: '#f59e0b',
+        cleaning: '#10b981',
+        tutoring: '#8b5cf6',
+        painting: '#ef4444',
+        carpentry: '#06b6d4',
+        gardening: '#22c55e',
+        moving: '#f97316'
+      };
+      
+      return data.data.map((cat: any, index: number) => ({
+        id: cat._id || index.toString(),
+        name: cat._id,
+        icon: categoryIcons[cat._id] || 'Wrench',
+        color: categoryColors[cat._id] || '#3b82f6',
+        count: cat.count
+      }));
     },
   });
 }
@@ -74,13 +122,14 @@ export function useReviews(serviceId: string) {
   return useQuery({
     queryKey: ["reviews", serviceId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("reviews")
-        .select("*, profiles:user_id(full_name, avatar_url)")
-        .eq("service_id", serviceId)
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return data;
+      const response = await fetch(`${API_URL}/reviews/service/${serviceId}`);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to fetch reviews');
+      }
+      
+      const data = await response.json();
+      return data.data || [];
     },
     enabled: !!serviceId,
   });
