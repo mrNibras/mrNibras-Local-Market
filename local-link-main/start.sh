@@ -30,14 +30,20 @@ SERVER_DIR="$SCRIPT_DIR/server"
 # Check if MongoDB is running
 echo -e "${YELLOW}Checking MongoDB...${NC}"
 if ! pgrep -x "mongod" > /dev/null; then
-    echo -e "${RED}❌ MongoDB is not running!${NC}"
-    echo "Please start MongoDB first:"
-    echo "  sudo systemctl start mongod"
-    echo "  OR"
-    echo "  mongod"
-    exit 1
+    # Check if MongoDB is running in Docker
+    if ! docker ps 2>/dev/null | grep -q "mongo"; then
+        echo -e "${RED}❌ MongoDB is not running!${NC}"
+        echo "Starting MongoDB in Docker..."
+        docker start local-link-mongo 2>/dev/null || \
+            docker run -d -p 27017:27017 --name local-link-mongo mongo:7
+        sleep 3
+        echo -e "${GREEN}✅ MongoDB started in Docker${NC}"
+    else
+        echo -e "${GREEN}✅ MongoDB is running in Docker${NC}"
+    fi
+else
+    echo -e "${GREEN}✅ MongoDB is running${NC}"
 fi
-echo -e "${GREEN}✅ MongoDB is running${NC}"
 
 # Check if server .env exists
 if [ ! -f "$SERVER_DIR/.env" ]; then
