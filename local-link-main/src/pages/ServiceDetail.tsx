@@ -72,9 +72,19 @@ const ServiceDetail = () => {
 
           <div className="grid md:grid-cols-[1fr,340px] gap-8">
             <div>
-              <div className="h-64 rounded-2xl bg-muted flex items-center justify-center mb-6 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-                <span className="relative text-7xl font-display font-bold text-primary/20">{service.title.charAt(0)}</span>
+              <div className="h-96 rounded-2xl bg-muted flex items-center justify-center mb-6 relative overflow-hidden">
+                {service.images && service.images.length > 0 ? (
+                  <img
+                    src={service.images[0]}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+                    <span className="relative text-9xl font-display font-bold text-primary/20">{service.title.charAt(0)}</span>
+                  </>
+                )}
               </div>
 
               <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary mb-4">

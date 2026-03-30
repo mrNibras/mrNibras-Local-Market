@@ -224,6 +224,15 @@ export default function BookingPage() {
                   <CardTitle>Service Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {service.images && service.images.length > 0 && (
+                    <div className="h-48 rounded-lg overflow-hidden mb-4">
+                      <img
+                        src={service.images[0]}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                       <span className="text-xl font-bold text-primary">{service.title.charAt(0)}</span>
