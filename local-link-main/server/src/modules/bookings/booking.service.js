@@ -1,5 +1,6 @@
 import * as bookingRepository from './booking.repository.js';
 import * as serviceRepository from '../services/service.repository.js';
+import Booking from './booking.model.js';
 import { NotFoundError, ForbiddenError, BadRequestError, ConflictError } from '../../shared/middleware/error.middleware.js';
 import logger from '../../shared/utils/logger.js';
 

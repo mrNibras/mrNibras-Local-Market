@@ -5,7 +5,13 @@
       "Bash(python3 *)",
       "Bash(cut *)",
       "Bash(then *)",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(sleep *)",
+      "Bash(pkill *)",
+      "Bash(npm run *)",
+      "Bash(tee *)",
+      "Bash(nohup *)",
+      "Bash(bash *)"
     ]
   },
   "$version": 3

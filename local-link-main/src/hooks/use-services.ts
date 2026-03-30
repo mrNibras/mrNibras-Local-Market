@@ -84,26 +84,35 @@ export function useService(id: string) {
   return useQuery({
     queryKey: ["service", id],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/services/${id}`);
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to fetch service');
+      try {
+        const response = await fetch(`${API_URL}/services/${id}`);
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({ message: 'Failed to fetch service' }));
+          throw new Error(error.message || `HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const service = data.data;
+        
+        console.log("Service detail response:", service);
+        
+        // Map backend fields to frontend fields
+        return {
+          ...service,
+          id: service._id,
+          category_name: service.category,
+          provider_name: service.provider?.name || 'Unknown Provider',
+          avg_rating: service.averageRating || 0,
+          review_count: service.totalReviews || 0
+        };
+      } catch (error) {
+        console.error("Error in useService:", error);
+        throw error;
       }
-      
-      const data = await response.json();
-      const service = data.data;
-      
-      // Map backend fields to frontend fields
-      return {
-        ...service,
-        id: service._id,
-        category_name: service.category,
-        provider_name: service.provider?.name || 'Unknown Provider',
-        avg_rating: service.averageRating || 0,
-        review_count: service.totalReviews || 0
-      };
     },
     enabled: !!id,
+    retry: 1,
+    retryDelay: 1000,
   });
 }
 

@@ -38,14 +38,22 @@ export default function BookingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!service || !user) return;
-    
+
+    if (!service || !user) {
+      toast.error("Service or user not found");
+      return;
+    }
+
+    if (!service.provider || !service.provider._id) {
+      toast.error("Service provider information missing");
+      return;
+    }
+
     setLoading(true);
-    
+
     try {
       const token = localStorage.getItem("accessToken");
-      
+
       const response = await fetch(`${API_URL}/bookings`, {
         method: "POST",
         headers: {
