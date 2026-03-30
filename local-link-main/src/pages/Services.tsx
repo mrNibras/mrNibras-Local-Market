@@ -14,11 +14,17 @@ const ServicesPage = () => {
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
-  const { data: services, isLoading } = useServices(
+  const { data: services, isLoading, error } = useServices(
     selectedCategory || undefined,
     query || undefined
   );
   const { data: categories } = useCategories();
+
+  // Debug logging
+  console.log("Services page - isLoading:", isLoading);
+  console.log("Services page - error:", error);
+  console.log("Services page - services:", services);
+  console.log("Services page - categories:", categories);
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,7 +69,13 @@ const ServicesPage = () => {
             ))}
           </div>
 
-          {isLoading ? (
+          {error ? (
+            <div className="text-center py-20">
+              <p className="text-xl font-semibold text-destructive mb-2">Error loading services</p>
+              <p className="text-muted-foreground">{(error as Error).message}</p>
+              <Button onClick={() => window.location.reload()} className="mt-4">Reload Page</Button>
+            </div>
+          ) : isLoading ? (
             <div className="flex justify-center py-20">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
