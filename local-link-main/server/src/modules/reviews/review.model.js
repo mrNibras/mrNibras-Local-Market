@@ -32,6 +32,41 @@ const reviewSchema = new mongoose.Schema({
     max: [5, 'Rating cannot exceed 5']
   },
 
+  // Multi-metric ratings
+  metrics: {
+    quality: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    communication: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    timeliness: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    professionalism: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    value: {
+      type: Number,
+      min: 1,
+      max: 5
+    }
+  },
+
+  // Would recommend?
+  wouldRecommend: {
+    type: Boolean,
+    default: true
+  },
+
   comment: {
     type: String,
     trim: true,

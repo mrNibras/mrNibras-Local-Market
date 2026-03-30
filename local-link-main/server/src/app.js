@@ -23,6 +23,9 @@ import paymentRoutes from './modules/payments/payment.routes.js';
 import notificationRoutes from './modules/notifications/notification.routes.js';
 import offerRoutes from './modules/offers/offer.routes.js';
 import chatRoutes from './modules/chat/chat.routes.js';
+import favoriteRoutes from './modules/favorites/favorite.routes.js';
+import disputeRoutes from './modules/disputes/dispute.routes.js';
+import analyticsRoutes from './modules/analytics/analytics.routes.js';
 
 const app = express();
 
@@ -104,6 +107,9 @@ app.use(`${apiPrefix}/payments`, paymentRoutes);
 app.use(`${apiPrefix}/notifications`, notificationRoutes);
 app.use(`${apiPrefix}/offers`, offerRoutes);
 app.use(`${apiPrefix}/chat`, chatRoutes);
+app.use(`${apiPrefix}/favorites`, favoriteRoutes);
+app.use(`${apiPrefix}/disputes`, disputeRoutes);
+app.use(`${apiPrefix}/analytics`, analyticsRoutes);
 app.use(`${apiPrefix}/admin`, adminRoutes);
 
 // API documentation route
@@ -123,6 +129,9 @@ app.get(`${apiPrefix}`, (req, res) => {
       notifications: `${apiPrefix}/notifications`,
       offers: `${apiPrefix}/offers`,
       chat: `${apiPrefix}/chat`,
+      favorites: `${apiPrefix}/favorites`,
+      disputes: `${apiPrefix}/disputes`,
+      analytics: `${apiPrefix}/analytics`,
       admin: `${apiPrefix}/admin`
     }
   });
