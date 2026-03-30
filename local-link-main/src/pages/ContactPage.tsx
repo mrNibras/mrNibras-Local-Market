@@ -54,30 +54,24 @@ export default function ContactPage() {
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-          recipientId: service.provider._id,
-          serviceId: service._id,
+          recipient: service.provider._id,
+          service: service._id,
           subject: messageData.subject,
-          content: messageData.message
+          content: messageData.message,
+          messageType: 'inquiry'
         })
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        toast.success("Message sent successfully!");
+        toast.success("Message sent successfully! The provider will respond soon.");
         navigate(`/messages`);
-      } else if (response.status === 404) {
-        // Messages endpoint doesn't exist yet, simulate success
-        toast.success("Message sent! The provider will respond soon.");
-        setTimeout(() => navigate(`/services/${id}`), 2000);
       } else {
-        const error = await response.json();
-        toast.error(error.message || "Failed to send message");
+        toast.error(data.message || "Failed to send message");
       }
     } catch (error) {
       console.error("Contact error:", error);
-      // Simulate success for now since messages endpoint might not exist
-      toast.success("Message sent! The provider will respond soon.");
-      setTimeout(() => navigate(`/services/${id}`), 2000);
+      toast.error("Connection error. Please try again.");
     } finally {
       setLoading(false);
     }
