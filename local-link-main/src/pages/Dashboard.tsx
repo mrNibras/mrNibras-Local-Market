@@ -20,16 +20,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    const storedToken = localStorage.getItem("accessToken");
+    
+    if (!storedUser || !storedToken) {
       navigate("/login");
       return;
     }
+    
     const userData = JSON.parse(storedUser);
     setUser(userData);
     
     // Fetch user stats
     fetchStats(userData);
-  }, [navigate]);
+  }, []);
 
   const fetchStats = async (userData: any) => {
     try {

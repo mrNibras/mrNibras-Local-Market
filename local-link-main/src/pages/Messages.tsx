@@ -13,12 +13,15 @@ export default function Messages() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    const storedToken = localStorage.getItem("accessToken");
+    
+    if (!storedUser || !storedToken) {
       navigate("/login");
       return;
     }
+    
     setUser(JSON.parse(storedUser));
-  }, [navigate]);
+  }, []);
 
   if (!user) return null;
 

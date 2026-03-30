@@ -16,17 +16,20 @@ export default function Calendar() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    const storedToken = localStorage.getItem("accessToken");
+    
+    if (!storedUser || !storedToken) {
       toast.error("Please log in to view your calendar");
       navigate("/login");
       return;
     }
+    
     const userData = JSON.parse(storedUser);
     setUser(userData);
     
     // Fetch bookings from backend
     fetchBookings(userData);
-  }, [navigate]);
+  }, []);
 
   const fetchBookings = async (userData: any) => {
     try {
@@ -54,7 +57,17 @@ export default function Calendar() {
     }
   };
 
-  if (!user) return null;
+  // Don't render anything if not logged in (will redirect)
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Filter upcoming bookings
   const upcomingBookings = bookings
