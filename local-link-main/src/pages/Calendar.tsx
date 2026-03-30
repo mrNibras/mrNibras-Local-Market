@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, Users, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -16,6 +17,7 @@ export default function Calendar() {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
+      toast.error("Please log in to view your calendar");
       navigate("/login");
       return;
     }
