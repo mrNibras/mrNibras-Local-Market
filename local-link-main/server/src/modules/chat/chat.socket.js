@@ -1,8 +1,8 @@
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import envVars from '../config/env.js';
-import * as chatService from './modules/chat/chat.service.js';
-import logger from './shared/utils/logger.js';
+import envVars from '../../config/env.js';
+import * as chatService from './chat.service.js';
+import logger from '../../shared/utils/logger.js';
 
 /**
  * Socket.io Server Setup
