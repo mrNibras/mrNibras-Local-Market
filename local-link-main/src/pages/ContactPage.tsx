@@ -71,7 +71,11 @@ export default function ContactPage() {
       }
     } catch (error) {
       console.error("Contact error:", error);
-      toast.error("Connection error. Please try again.");
+      if (error instanceof Error) {
+        toast.error(`Failed to send message: ${error.message}`);
+      } else {
+        toast.error("Connection error. Please check if backend is running.");
+      }
     } finally {
       setLoading(false);
     }

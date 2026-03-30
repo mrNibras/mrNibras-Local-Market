@@ -71,7 +71,11 @@ export default function BookingPage() {
       }
     } catch (error) {
       console.error("Booking error:", error);
-      toast.error("Connection error. Is the backend running?");
+      if (error instanceof Error) {
+        toast.error(`Booking failed: ${error.message}`);
+      } else {
+        toast.error("Connection error. Is the backend running?");
+      }
     } finally {
       setLoading(false);
     }
