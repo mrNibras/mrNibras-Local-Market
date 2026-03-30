@@ -30,7 +30,7 @@ const ServiceCard = ({ service }: { service: ServiceWithRating }) => {
             <span className="text-sm font-semibold text-foreground">{Number(service.avg_rating).toFixed(1)}</span>
             <span className="text-sm text-muted-foreground">({service.review_count})</span>
           </div>
-          {service.location && (
+          {service.location && typeof service.location === 'string' && (
             <div className="flex items-center gap-1 text-muted-foreground">
               <MapPin className="w-3.5 h-3.5" />
               <span className="text-xs">{service.location}</span>

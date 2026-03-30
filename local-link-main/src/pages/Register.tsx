@@ -39,8 +39,14 @@ export default function Register() {
         localStorage.setItem("refreshToken", data.data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.data.user));
 
-        toast.success("Registration successful!");
-        navigate("/");
+        toast.success("Registration successful! Welcome to mrNibras!");
+        
+        // Redirect based on role
+        if (data.data.user.role === "provider") {
+          navigate("/dashboard");
+        } else {
+          navigate("/services");
+        }
       } else {
         toast.error(data.message || "Registration failed");
       }

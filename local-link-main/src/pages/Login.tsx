@@ -37,8 +37,14 @@ export default function Login() {
         localStorage.setItem("refreshToken", data.data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.data.user));
 
-        toast.success("Login successful!");
-        navigate("/");
+        toast.success(`Welcome back, ${data.data.user.name}!`);
+        
+        // Redirect based on role
+        if (data.data.user.role === "provider") {
+          navigate("/dashboard");
+        } else {
+          navigate("/services");
+        }
       } else {
         toast.error(data.message || "Login failed");
       }

@@ -1,10 +1,36 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin } from "lucide-react";
+import { Menu, X, MapPin, User, LogOut, Settings } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -31,12 +57,49 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Link to="/login">
-            <Button variant="ghost" size="sm">Log In</Button>
-          </Link>
-          <Link to="/register">
-            <Button size="sm">Get Started</Button>
-          </Link>
+          {user ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <User className="w-4 h-4" />
+                    {user.name}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium">{user.name}</p>
+                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+                    <Settings className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button variant="ghost" size="sm">Log In</Button>
+              </Link>
+              <Link to="/register">
+                <Button size="sm">Get Started</Button>
+              </Link>
+            </>
+          )}
         </div>
 
         <button className="md:hidden" onClick={() => setOpen(!open)}>
@@ -49,14 +112,37 @@ const Navbar = () => {
           <Link to="/services" className="block text-sm font-medium text-muted-foreground" onClick={() => setOpen(false)}>Browse Services</Link>
           <a href="/#how-it-works" className="block text-sm font-medium text-muted-foreground" onClick={() => setOpen(false)}>How It Works</a>
           <a href="/#categories" className="block text-sm font-medium text-muted-foreground" onClick={() => setOpen(false)}>Categories</a>
-          <div className="flex gap-2 pt-2">
-            <Link to="/login" className="flex-1">
-              <Button variant="ghost" size="sm" className="w-full">Log In</Button>
-            </Link>
-            <Link to="/register" className="flex-1">
-              <Button size="sm" className="w-full">Get Started</Button>
-            </Link>
-          </div>
+          
+          {user ? (
+            <div className="space-y-2 pt-2">
+              <div className="text-sm font-medium">{user.name}</div>
+              <Link to="/profile" onClick={() => setOpen(false)}>
+                <Button variant="ghost" size="sm" className="w-full justify-start">
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </Button>
+              </Link>
+              <Link to="/dashboard" onClick={() => setOpen(false)}>
+                <Button variant="ghost" size="sm" className="w-full justify-start">
+                  <Settings className="mr-2 h-4 w-4" />
+                  Dashboard
+                </Button>
+              </Link>
+              <Button variant="ghost" size="sm" className="w-full justify-start text-destructive" onClick={() => { handleLogout(); setOpen(false); }}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <div className="flex gap-2 pt-2">
+              <Link to="/login" className="flex-1">
+                <Button variant="ghost" size="sm" className="w-full">Log In</Button>
+              </Link>
+              <Link to="/register" className="flex-1">
+                <Button size="sm" className="w-full">Get Started</Button>
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </nav>
