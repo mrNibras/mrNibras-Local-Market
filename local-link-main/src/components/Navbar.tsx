@@ -31,8 +31,12 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="sm">Log In</Button>
-          <Button size="sm">Get Started</Button>
+          <Link to="/login">
+            <Button variant="ghost" size="sm">Log In</Button>
+          </Link>
+          <Link to="/register">
+            <Button size="sm">Get Started</Button>
+          </Link>
         </div>
 
         <button className="md:hidden" onClick={() => setOpen(!open)}>
@@ -46,8 +50,12 @@ const Navbar = () => {
           <a href="#how-it-works" className="block text-sm font-medium text-muted-foreground" onClick={() => setOpen(false)}>How It Works</a>
           <a href="#categories" className="block text-sm font-medium text-muted-foreground" onClick={() => setOpen(false)}>Categories</a>
           <div className="flex gap-2 pt-2">
-            <Button variant="ghost" size="sm" className="flex-1">Log In</Button>
-            <Button size="sm" className="flex-1">Get Started</Button>
+            <Link to="/login" className="flex-1">
+              <Button variant="ghost" size="sm" className="w-full">Log In</Button>
+            </Link>
+            <Link to="/register" className="flex-1">
+              <Button size="sm" className="w-full">Get Started</Button>
+            </Link>
           </div>
         </div>
       )}
