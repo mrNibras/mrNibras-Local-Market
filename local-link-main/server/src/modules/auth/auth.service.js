@@ -6,6 +6,9 @@ import { generateAccessToken, generateRefreshToken, verifyRefreshToken, verifyAc
 import { NotFoundError, BadRequestError, ConflictError, UnauthorizedError } from '../../shared/middleware/error.middleware.js';
 import logger from '../../shared/utils/logger.js';
 
+// Re-export for use in controllers
+export { generateAccessToken, generateRefreshToken, verifyAccessToken };
+
 /**
  * Auth Service
  * Handles authentication and token management
