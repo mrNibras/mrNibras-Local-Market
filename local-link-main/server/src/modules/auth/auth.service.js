@@ -288,10 +288,3 @@ export const resetPassword = async (email, code, newPassword) => {
 
   return { message: 'Password reset successfully' };
 };
-
-/**
- * Verify access token (exported for use in middleware)
- * @param {string} token - Access token
- * @returns {Object} Decoded token
- */
-export { verifyAccessToken };
