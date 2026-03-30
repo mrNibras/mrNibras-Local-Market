@@ -27,8 +27,12 @@ const ServiceCard = ({ service }: { service: ServiceWithRating }) => {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-accent text-accent" />
-            <span className="text-sm font-semibold text-foreground">{Number(service.avg_rating).toFixed(1)}</span>
-            <span className="text-sm text-muted-foreground">({service.review_count})</span>
+            <span className="text-sm font-semibold text-foreground">
+              {service.averageRating ? Number(service.averageRating).toFixed(1) : 'N/A'}
+            </span>
+            <span className="text-sm text-muted-foreground">
+              ({service.totalReviews || 0})
+            </span>
           </div>
           {service.location && typeof service.location === 'string' && (
             <div className="flex items-center gap-1 text-muted-foreground">

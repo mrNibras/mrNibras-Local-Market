@@ -20,6 +20,11 @@ export interface Service {
     coordinates: number[];
   };
   isActive: boolean;
+  id?: string;
+  category_name?: string;
+  provider_name?: string;
+  avg_rating?: number;
+  review_count?: number;
 }
 
 export interface Category {
@@ -50,7 +55,16 @@ export function useServices(category?: string, query?: string) {
       }
       
       const data = await response.json();
-      return data.data || [];
+      
+      // Map backend fields to frontend fields
+      return (data.data || []).map((service: any) => ({
+        ...service,
+        id: service._id,
+        category_name: service.category,
+        provider_name: service.provider?.name || 'Unknown Provider',
+        avg_rating: service.averageRating || 0,
+        review_count: service.totalReviews || 0
+      }));
     },
   });
 }
@@ -66,7 +80,17 @@ export function useService(id: string) {
       }
       
       const data = await response.json();
-      return data.data;
+      const service = data.data;
+      
+      // Map backend fields to frontend fields
+      return {
+        ...service,
+        id: service._id,
+        category_name: service.category,
+        provider_name: service.provider?.name || 'Unknown Provider',
+        avg_rating: service.averageRating || 0,
+        review_count: service.totalReviews || 0
+      };
     },
     enabled: !!id,
   });

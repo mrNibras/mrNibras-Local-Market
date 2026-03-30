@@ -1,13 +1,30 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Star, MapPin, ArrowLeft, Clock, Shield, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useService } from "@/hooks/use-services";
+import { toast } from "sonner";
 
 const ServiceDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data: service, isLoading } = useService(id || "");
+
+  const handleBookNow = () => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("accessToken");
+    
+    if (!user || !token) {
+      toast.error("Please log in to book a service");
+      navigate("/login");
+      return;
+    }
+    
+    // Navigate to booking page or show booking modal
+    toast.info("Booking feature coming soon!");
+    // TODO: Navigate to booking page: navigate(`/bookings/new?service=${id}`);
+  };
 
   if (isLoading) {
     return (
@@ -57,7 +74,9 @@ const ServiceDetail = () => {
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center gap-1">
                   <Star className="w-5 h-5 fill-accent text-accent" />
-                  <span className="font-semibold text-foreground">{Number(service.avg_rating).toFixed(1)}</span>
+                  <span className="font-semibold text-foreground">
+                    {service.averageRating ? Number(service.averageRating).toFixed(1) : 'N/A'}
+                  </span>
                   <span className="text-muted-foreground">({service.review_count} reviews)</span>
                 </div>
                 {service.location && (
@@ -102,10 +121,10 @@ const ServiceDetail = () => {
                   <span className="text-muted-foreground">ETB / service</span>
                 </div>
 
-                <Button className="w-full h-12 rounded-xl text-base font-semibold mb-3">
+                <Button onClick={handleBookNow} className="w-full h-12 rounded-xl text-base font-semibold mb-3">
                   Book Now
                 </Button>
-                <Button variant="outline" className="w-full h-12 rounded-xl text-base">
+                <Button onClick={() => toast.info("Contact feature coming soon!")} variant="outline" className="w-full h-12 rounded-xl text-base">
                   Contact Provider
                 </Button>
               </div>
