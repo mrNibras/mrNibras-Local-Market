@@ -143,7 +143,7 @@ const ServiceDetail = () => {
                 <Button onClick={handleBookNow} className="w-full h-12 rounded-xl text-base font-semibold mb-3">
                   Book Now
                 </Button>
-                <Button onClick={() => toast.info("Contact feature coming soon!")} variant="outline" className="w-full h-12 rounded-xl text-base">
+                <Button onClick={handleContactProvider} variant="outline" className="w-full h-12 rounded-xl text-base">
                   Contact Provider
                 </Button>
               </div>

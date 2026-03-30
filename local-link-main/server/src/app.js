@@ -139,6 +139,7 @@ app.get(`${apiPrefix}`, (req, res) => {
       favorites: `${apiPrefix}/favorites`,
       disputes: `${apiPrefix}/disputes`,
       analytics: `${apiPrefix}/analytics`,
+      messages: `${apiPrefix}/messages`,
       admin: `${apiPrefix}/admin`
     }
   });
