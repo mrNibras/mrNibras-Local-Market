@@ -9,10 +9,20 @@ const ServiceCard = ({ service }: { service: ServiceWithRating }) => {
       className="group block rounded-2xl bg-card border border-border shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden"
     >
       <div className="h-44 bg-muted flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-        <span className="relative text-4xl font-display font-bold text-primary/30">
-          {service.title.charAt(0)}
-        </span>
+        {service.images && service.images.length > 0 ? (
+          <img
+            src={service.images[0]}
+            alt={service.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+            <span className="relative text-4xl font-display font-bold text-primary/30">
+              {service.title.charAt(0)}
+            </span>
+          </>
+        )}
         <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full bg-card/90 backdrop-blur text-foreground">
           {service.category_name}
         </span>
