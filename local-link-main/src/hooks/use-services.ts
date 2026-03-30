@@ -38,34 +38,45 @@ export function useServices(category?: string, query?: string) {
   return useQuery({
     queryKey: ["services", category, query],
     queryFn: async () => {
-      let url = `${API_URL}/services`;
-      const params = new URLSearchParams();
-      
-      if (category) params.append('category', category);
-      if (query) params.append('search', query);
-      
-      if (params.toString()) {
-        url += `?${params.toString()}`;
-      }
+      try {
+        let url = `${API_URL}/services`;
+        const params = new URLSearchParams();
+        
+        if (category) params.append('category', category);
+        if (query) params.append('search', query);
+        
+        if (params.toString()) {
+          url += `?${params.toString()}`;
+        }
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to fetch services');
+        console.log("Fetching services from:", url);
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({ message: 'Failed to fetch services' }));
+          throw new Error(error.message || `HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("Services response:", data);
+        
+        // Map backend fields to frontend fields
+        return (data.data || []).map((service: any) => ({
+          ...service,
+          id: service._id,
+          category_name: service.category,
+          provider_name: service.provider?.name || 'Unknown Provider',
+          avg_rating: service.averageRating || 0,
+          review_count: service.totalReviews || 0
+        }));
+      } catch (error) {
+        console.error("Error in useServices:", error);
+        throw error;
       }
-      
-      const data = await response.json();
-      
-      // Map backend fields to frontend fields
-      return (data.data || []).map((service: any) => ({
-        ...service,
-        id: service._id,
-        category_name: service.category,
-        provider_name: service.provider?.name || 'Unknown Provider',
-        avg_rating: service.averageRating || 0,
-        review_count: service.totalReviews || 0
-      }));
     },
+    retry: 1,
+    retryDelay: 1000,
   });
 }
 

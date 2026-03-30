@@ -18,13 +18,42 @@ const ServicesPage = () => {
     selectedCategory || undefined,
     query || undefined
   );
-  const { data: categories } = useCategories();
+  const { data: categories, isLoading: categoriesLoading } = useCategories();
 
   // Debug logging
-  console.log("Services page - isLoading:", isLoading);
-  console.log("Services page - error:", error);
-  console.log("Services page - services:", services);
-  console.log("Services page - categories:", categories);
+  console.log("=== SERVICES PAGE DEBUG ===");
+  console.log("isLoading:", isLoading);
+  console.log("error:", error);
+  console.log("services:", services);
+  console.log("categories:", categories);
+  console.log("categoriesLoading:", categoriesLoading);
+
+  // Show loading state
+  if (isLoading || categoriesLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading services...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    console.error("Error loading services:", error);
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container pt-24 text-center">
+          <p className="text-xl font-semibold text-destructive mb-2">Error loading services</p>
+          <p className="text-muted-foreground mb-4">{(error as Error).message}</p>
+          <Button onClick={() => window.location.reload()}>Reload Page</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

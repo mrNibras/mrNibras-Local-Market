@@ -21,9 +21,20 @@ const ServiceDetail = () => {
       return;
     }
     
-    // Navigate to booking page or show booking modal
-    toast.info("Booking feature coming soon!");
-    // TODO: Navigate to booking page: navigate(`/bookings/new?service=${id}`);
+    // Navigate to booking page
+    navigate(`/bookings/${id}`);
+  };
+
+  const handleContactProvider = () => {
+    const user = localStorage.getItem("user");
+    
+    if (!user) {
+      toast.error("Please log in to contact providers");
+      navigate("/login");
+      return;
+    }
+    
+    toast.info("Contact feature coming soon! You can message providers after booking.");
   };
 
   if (isLoading) {
@@ -79,12 +90,19 @@ const ServiceDetail = () => {
                   </span>
                   <span className="text-muted-foreground">({service.review_count} reviews)</span>
                 </div>
-                {service.location && (
+                {service.location && typeof service.location === 'object' && service.location.coordinates ? (
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <MapPin className="w-4 h-4" />
-                    {service.location}
+                    <span className="text-sm">
+                      {service.location.coordinates[1].toFixed(4)}, {service.location.coordinates[0].toFixed(4)}
+                    </span>
                   </div>
-                )}
+                ) : service.location && typeof service.location === 'string' ? (
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm">{service.location}</span>
+                  </div>
+                ) : null}
               </div>
 
               <p className="text-muted-foreground leading-relaxed mb-8">{service.description}</p>
