@@ -47,6 +47,7 @@ const userSchema = new mongoose.Schema({
     },
     coordinates: {
       type: [Number], // [longitude, latitude]
+      default: [-73.935242, 40.730610], // Default to NYC
       index: '2dsphere'
     }
   },
