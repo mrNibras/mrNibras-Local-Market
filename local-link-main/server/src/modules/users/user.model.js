@@ -71,8 +71,54 @@ const userSchema = new mongoose.Schema({
     company: String,
     license: String,
     yearsOfExperience: Number,
-    specialties: [String]
+    specialties: [String],
+    bio: String,
+    portfolio: [{
+      title: String,
+      description: String,
+      images: [String],
+      completedAt: Date
+    }],
+    certifications: [{
+      name: String,
+      issuer: String,
+      issuedAt: Date,
+      certificateUrl: String
+    }],
+    verified: {
+      type: Boolean,
+      default: false
+    },
+    verifiedAt: Date
   },
+
+  // Trust Score (calculated)
+  trustScore: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100
+  },
+
+  // Response time tracking (in minutes)
+  avgResponseTime: {
+    type: Number,
+    default: 0
+  },
+
+  // Statistics
+  stats: {
+    totalJobs: { type: Number, default: 0 },
+    completedJobs: { type: Number, default: 0 },
+    cancelledJobs: { type: Number, default: 0 },
+    totalEarnings: { type: Number, default: 0 }
+  },
+
+  // Badges
+  badges: [{
+    type: String,
+    enum: ['top_rated', 'rising_talent', 'fast_responder', 'verified', 'super_provider']
+  }],
 
   // Refresh token for session management
   refreshToken: {

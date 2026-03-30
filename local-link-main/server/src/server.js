@@ -1,7 +1,17 @@
+import http from 'http';
 import app from './app.js';
 import envVars from './config/env.js';
 import connectDB from './config/db.js';
 import logger from './shared/utils/logger.js';
+import { initSocket } from './modules/chat/chat.socket.js';
+
+// ==================== Create HTTP Server ====================
+
+const server = http.createServer(app);
+
+// ==================== Initialize Socket.io ====================
+
+initSocket(server);
 
 // ==================== Start Server ====================
 
@@ -14,7 +24,7 @@ const startServer = async () => {
     await connectDB();
 
     // Start server
-    const server = app.listen(PORT, () => {
+    server.listen(PORT, () => {
       logger.info(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
@@ -23,6 +33,7 @@ const startServer = async () => {
 ║   Environment: ${envVars.NODE_ENV.padEnd(36)}║
 ║   Port: ${String(PORT).padEnd(45)}║
 ║   API Prefix: ${envVars.API_PREFIX.padEnd(38)}║
+║   Socket.io: Enabled                                      ║
 ║                                                           ║
 ║   Ready to accept requests!                               ║
 ║                                                           ║

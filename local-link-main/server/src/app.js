@@ -19,6 +19,10 @@ import bookingRoutes from './modules/bookings/booking.routes.js';
 import reviewRoutes from './modules/reviews/review.routes.js';
 import availabilityRoutes from './modules/availability/availability.routes.js';
 import adminRoutes from './modules/admin/admin.routes.js';
+import paymentRoutes from './modules/payments/payment.routes.js';
+import notificationRoutes from './modules/notifications/notification.routes.js';
+import offerRoutes from './modules/offers/offer.routes.js';
+import chatRoutes from './modules/chat/chat.routes.js';
 
 const app = express();
 
@@ -96,6 +100,10 @@ app.use(`${apiPrefix}/services`, serviceRoutes);
 app.use(`${apiPrefix}/bookings`, bookingRoutes);
 app.use(`${apiPrefix}/reviews`, reviewRoutes);
 app.use(`${apiPrefix}/availability`, availabilityRoutes);
+app.use(`${apiPrefix}/payments`, paymentRoutes);
+app.use(`${apiPrefix}/notifications`, notificationRoutes);
+app.use(`${apiPrefix}/offers`, offerRoutes);
+app.use(`${apiPrefix}/chat`, chatRoutes);
 app.use(`${apiPrefix}/admin`, adminRoutes);
 
 // API documentation route
@@ -111,6 +119,10 @@ app.get(`${apiPrefix}`, (req, res) => {
       bookings: `${apiPrefix}/bookings`,
       reviews: `${apiPrefix}/reviews`,
       availability: `${apiPrefix}/availability`,
+      payments: `${apiPrefix}/payments`,
+      notifications: `${apiPrefix}/notifications`,
+      offers: `${apiPrefix}/offers`,
+      chat: `${apiPrefix}/chat`,
       admin: `${apiPrefix}/admin`
     }
   });
