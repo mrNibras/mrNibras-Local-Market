@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, MapPin, User, LogOut, Settings, Calendar, MessageSquare } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -82,6 +82,14 @@ const Navbar = () => {
                     <Settings className="mr-2 h-4 w-4" />
                     Dashboard
                   </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/calendar")}>
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Calendar
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/messages")}>
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    Messages
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
@@ -126,6 +134,18 @@ const Navbar = () => {
                 <Button variant="ghost" size="sm" className="w-full justify-start">
                   <Settings className="mr-2 h-4 w-4" />
                   Dashboard
+                </Button>
+              </Link>
+              <Link to="/calendar" onClick={() => setOpen(false)}>
+                <Button variant="ghost" size="sm" className="w-full justify-start">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Calendar
+                </Button>
+              </Link>
+              <Link to="/messages" onClick={() => setOpen(false)}>
+                <Button variant="ghost" size="sm" className="w-full justify-start">
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Messages
                 </Button>
               </Link>
               <Button variant="ghost" size="sm" className="w-full justify-start text-destructive" onClick={() => { handleLogout(); setOpen(false); }}>
