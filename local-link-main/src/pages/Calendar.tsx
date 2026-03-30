@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, Users, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Users, CheckCircle, XCircle, Loader2 } from "lucide-react";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export default function Calendar() {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -15,29 +19,56 @@ export default function Calendar() {
       navigate("/login");
       return;
     }
-    setUser(JSON.parse(storedUser));
+    const userData = JSON.parse(storedUser);
+    setUser(userData);
+    
+    // Fetch bookings from backend
+    fetchBookings(userData);
   }, [navigate]);
+
+  const fetchBookings = async (userData: any) => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("accessToken");
+      const endpoint = userData.role === "provider" 
+        ? "/bookings/provider/my-bookings"
+        : "/bookings/my-bookings";
+      
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setBookings(data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch bookings:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!user) return null;
 
-  const upcomingBookings = [
-    {
-      id: 1,
-      service: "Plumbing Service",
-      customer: "John Doe",
-      date: "2026-04-01",
-      time: "10:00 AM",
-      status: "confirmed"
-    },
-    {
-      id: 2,
-      service: "Electrical Repair",
-      customer: "Jane Smith",
-      date: "2026-04-02",
-      time: "2:00 PM",
-      status: "pending"
+  // Filter upcoming bookings
+  const upcomingBookings = bookings
+    .filter((booking: any) => new Date(booking.bookingDate) > new Date())
+    .slice(0, 5);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "accepted": return "bg-green-100 text-green-800";
+      case "pending": return "bg-yellow-100 text-yellow-800";
+      case "completed": return "bg-blue-100 text-blue-800";
+      case "cancelled": return "bg-red-100 text-red-800";
+      case "rejected": return "bg-gray-100 text-gray-800";
+      default: return "bg-gray-100 text-gray-800";
     }
-  ];
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,8 +91,8 @@ export default function Calendar() {
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card>
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card className="md:col-span-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calendar className="w-5 h-5" />
@@ -72,48 +103,63 @@ export default function Calendar() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {upcomingBookings.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-8">
-                    No upcoming bookings
-                  </p>
+                {loading ? (
+                  <div className="flex justify-center py-12">
+                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                  </div>
+                ) : upcomingBookings.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                    <p className="text-muted-foreground">No upcoming bookings</p>
+                    {user.role === "customer" && (
+                      <Button 
+                        className="mt-4"
+                        onClick={() => navigate("/services")}
+                      >
+                        Browse Services
+                      </Button>
+                    )}
+                  </div>
                 ) : (
                   <div className="space-y-4">
-                    {upcomingBookings.map((booking) => (
+                    {upcomingBookings.map((booking: any) => (
                       <div
-                        key={booking.id}
+                        key={booking._id}
                         className="p-4 rounded-lg border border-border bg-card"
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-semibold">{booking.service}</h3>
+                          <h3 className="font-semibold">
+                            {booking.service?.title || "Service"}
+                          </h3>
                           <span
-                            className={`text-xs px-2 py-1 rounded-full ${
-                              booking.status === "confirmed"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-yellow-100 text-yellow-800"
-                            }`}
+                            className={`text-xs px-2 py-1 rounded-full ${getStatusColor(booking.status)}`}
                           >
                             {booking.status}
                           </span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5" />
-                            <span>{booking.customer}</span>
-                          </div>
+                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                          {user.role === "customer" && booking.provider && (
+                            <div className="flex items-center gap-1">
+                              <Users className="w-3.5 h-3.5" />
+                              <span>{booking.provider.name}</span>
+                            </div>
+                          )}
+                          {user.role === "provider" && booking.customer && (
+                            <div className="flex items-center gap-1">
+                              <Users className="w-3.5 h-3.5" />
+                              <span>{booking.customer.name}</span>
+                            </div>
+                          )}
                           <div className="flex items-center gap-1">
                             <Clock className="w-3.5 h-3.5" />
-                            <span>{booking.time}</span>
+                            <span>{new Date(booking.bookingDate).toLocaleDateString()}</span>
                           </div>
-                        </div>
-                        <div className="flex gap-2 mt-3">
-                          <Button size="sm" variant="outline" className="flex-1">
-                            <CheckCircle className="w-3.5 h-3.5 mr-1" />
-                            Confirm
-                          </Button>
-                          <Button size="sm" variant="outline" className="flex-1">
-                            <XCircle className="w-3.5 h-3.5 mr-1" />
-                            Reschedule
-                          </Button>
+                          {booking.duration && (
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>{booking.duration} min</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -131,20 +177,24 @@ export default function Calendar() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
-                  <span className="text-sm text-muted-foreground">This Week</span>
-                  <span className="text-lg font-bold">0 bookings</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
-                  <span className="text-sm text-muted-foreground">This Month</span>
-                  <span className="text-lg font-bold">0 bookings</span>
+                  <span className="text-sm text-muted-foreground">Total Bookings</span>
+                  <span className="text-lg font-bold">{bookings.length}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
                   <span className="text-sm text-muted-foreground">Pending</span>
-                  <span className="text-lg font-bold">0 bookings</span>
+                  <span className="text-lg font-bold">
+                    {bookings.filter((b: any) => b.status === "pending").length}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
+                  <span className="text-sm text-muted-foreground">Upcoming</span>
+                  <span className="text-lg font-bold">{upcomingBookings.length}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-muted">
                   <span className="text-sm text-muted-foreground">Completed</span>
-                  <span className="text-lg font-bold">0 bookings</span>
+                  <span className="text-lg font-bold">
+                    {bookings.filter((b: any) => b.status === "completed").length}
+                  </span>
                 </div>
               </CardContent>
             </Card>
