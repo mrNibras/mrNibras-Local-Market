@@ -60,9 +60,9 @@ export default function BookingPage() {
           note: bookingData.notes
         })
       });
-      
+
       const data = await response.json();
-      
+
       if (response.ok) {
         toast.success("Booking created successfully!");
         navigate("/dashboard");

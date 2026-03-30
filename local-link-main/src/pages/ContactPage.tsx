@@ -62,8 +62,9 @@ export default function ContactPage() {
         })
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
         toast.success("Message sent successfully! The provider will respond soon.");
         navigate(`/messages`);
       } else {
