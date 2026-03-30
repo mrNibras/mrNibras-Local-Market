@@ -26,6 +26,7 @@ import chatRoutes from './modules/chat/chat.routes.js';
 import favoriteRoutes from './modules/favorites/favorite.routes.js';
 import disputeRoutes from './modules/disputes/dispute.routes.js';
 import analyticsRoutes from './modules/analytics/analytics.routes.js';
+import messageRoutes from './modules/messages/message.routes.js';
 
 const app = express();
 
@@ -115,6 +116,7 @@ app.use(`${apiPrefix}/chat`, chatRoutes);
 app.use(`${apiPrefix}/favorites`, favoriteRoutes);
 app.use(`${apiPrefix}/disputes`, disputeRoutes);
 app.use(`${apiPrefix}/analytics`, analyticsRoutes);
+app.use(`${apiPrefix}/messages`, messageRoutes);
 app.use(`${apiPrefix}/admin`, adminRoutes);
 
 // API documentation route
