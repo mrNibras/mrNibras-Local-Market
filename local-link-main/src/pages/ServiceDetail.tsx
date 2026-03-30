@@ -34,7 +34,8 @@ const ServiceDetail = () => {
       return;
     }
     
-    toast.info("Contact feature coming soon! You can message providers after booking.");
+    // Navigate to contact page
+    navigate(`/contact/${id}`);
   };
 
   if (isLoading) {
