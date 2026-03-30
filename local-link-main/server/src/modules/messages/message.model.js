@@ -108,4 +108,5 @@ messageSchema.methods.markAsRead = async function() {
   return this;
 };
 
-export default mongoose.model('Message', messageSchema);
+// Prevent model overwrite error
+export default mongoose.models.Message || mongoose.model('Message', messageSchema);
