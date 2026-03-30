@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, Users, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, Calendar as CalendarIcon, Clock, Users, CheckCircle, XCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
@@ -110,7 +110,7 @@ export default function Calendar() {
             <Card className="md:col-span-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
+                  <CalendarIcon className="w-5 h-5" />
                   Upcoming Bookings
                 </CardTitle>
                 <CardDescription>
@@ -124,7 +124,7 @@ export default function Calendar() {
                   </div>
                 ) : upcomingBookings.length === 0 ? (
                   <div className="text-center py-12">
-                    <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                    <CalendarIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
                     <p className="text-muted-foreground">No upcoming bookings</p>
                     {user.role === "customer" && (
                       <Button 

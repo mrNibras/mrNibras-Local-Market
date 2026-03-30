@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin, User, LogOut, Settings, Calendar, MessageSquare } from "lucide-react";
+import { Menu, X, MapPin, User, LogOut, Settings, Calendar as CalendarIcon, MessageSquare } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,21 +17,24 @@ const Navbar = () => {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    // Check if user is logged in
+    // Check if user is logged in on mount and when storage changes
     const checkUser = () => {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
+      try {
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("accessToken");
+        
+        if (storedUser && storedToken) {
+          setUser(JSON.parse(storedUser));
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error reading user from localStorage:", error);
         setUser(null);
       }
     };
     
     checkUser();
-    
-    // Listen for storage changes
-    window.addEventListener('storage', checkUser);
-    return () => window.removeEventListener('storage', checkUser);
   }, []);
 
   const handleLogout = () => {
@@ -93,7 +96,7 @@ const Navbar = () => {
                     Dashboard
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/calendar")}>
-                    <Calendar className="mr-2 h-4 w-4" />
+                    <CalendarIcon className="mr-2 h-4 w-4" />
                     Calendar
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/messages")}>
@@ -148,7 +151,7 @@ const Navbar = () => {
               </Link>
               <Link to="/calendar" onClick={() => setOpen(false)}>
                 <Button variant="ghost" size="sm" className="w-full justify-start">
-                  <Calendar className="mr-2 h-4 w-4" />
+                  <CalendarIcon className="mr-2 h-4 w-4" />
                   Calendar
                 </Button>
               </Link>
