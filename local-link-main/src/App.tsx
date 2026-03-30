@@ -14,6 +14,7 @@ import Calendar from "./pages/Calendar.tsx";
 import Messages from "./pages/Messages.tsx";
 import BookingPage from "./pages/BookingPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
+import CreateService from "./pages/CreateService.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/bookings/:id" element={<BookingPage />} />
           <Route path="/contact/:id" element={<ContactPage />} />
+          <Route path="/create-service" element={<CreateService />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />

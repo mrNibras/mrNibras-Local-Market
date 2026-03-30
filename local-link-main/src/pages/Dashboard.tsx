@@ -126,6 +126,20 @@ export default function Dashboard() {
             </p>
           </div>
 
+          {user.role === "provider" && (
+            <div className="mb-8 p-4 rounded-lg bg-primary/10 border border-primary/20">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="font-semibold text-lg">Ready to offer your services?</h2>
+                  <p className="text-muted-foreground">Create a new service listing to reach customers</p>
+                </div>
+                <Button onClick={() => navigate("/create-service")}>
+                  Create Service
+                </Button>
+              </div>
+            </div>
+          )}
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
             {dashboardStats.map((stat) => (
               <Card key={stat.title}>
