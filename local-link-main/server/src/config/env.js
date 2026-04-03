@@ -13,8 +13,17 @@ const envVars = {
   RATE_LIMIT_WINDOW_MS: process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000,
   RATE_LIMIT_MAX_REQUESTS: process.env.RATE_LIMIT_MAX_REQUESTS || 100,
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
-  CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:5173',
-  API_PREFIX: process.env.API_PREFIX || '/api'
+  CORS_ORIGIN: process.env.CORS_ORIGIN || process.env.CLIENT_URL || 'http://localhost:5173',
+  API_PREFIX: process.env.API_PREFIX || '/api',
+  // Payment configuration
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+  // Email configuration
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_PORT: process.env.SMTP_PORT || 587,
+  SMTP_USER: process.env.SMTP_USER,
+  SMTP_PASS: process.env.SMTP_PASS,
+  SMTP_FROM: process.env.SMTP_FROM || 'noreply@localhost.com'
 };
 
 // Validate required environment variables

@@ -36,13 +36,19 @@ const app = express();
 app.use(helmet());
 
 // Enable CORS
+const corsOrigins = [
+  'http://localhost:5173',
+  'http://localhost:8080',
+  'http://localhost:3000'
+];
+
+// Add CORS_ORIGIN from environment if not already in list
+if (envVars.CORS_ORIGIN && !corsOrigins.includes(envVars.CORS_ORIGIN)) {
+  corsOrigins.push(envVars.CORS_ORIGIN);
+}
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:8080',
-    'http://localhost:3000',
-    envVars.CORS_ORIGIN
-  ].filter(Boolean),
+  origin: corsOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
