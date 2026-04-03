@@ -1,0 +1,3 @@
+# Backend deployment configuration
+# This file tells Render where the backend code lives
+rootDir: server
