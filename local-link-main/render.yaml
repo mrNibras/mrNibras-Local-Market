@@ -4,7 +4,7 @@ services:
     env: node
     region: oregon
     plan: free
-    rootDir: server
+    rootDir: local-link-main/server
     buildCommand: npm install
     startCommand: npm start
     envVars:
