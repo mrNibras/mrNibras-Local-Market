@@ -11,7 +11,8 @@
       "Bash(npm run *)",
       "Bash(tee *)",
       "Bash(nohup *)",
-      "Bash(bash *)"
+      "Bash(bash *)",
+      "Bash(convert *)"
     ]
   },
   "$version": 3
