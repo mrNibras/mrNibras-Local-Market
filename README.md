@@ -2,11 +2,21 @@
 
 > A production-ready full-stack local services marketplace with real-time chat, payment processing, offer negotiation, and advanced analytics.
 
-**🔴 Live Demo:**
-- **Frontend:** https://mr-nibras-local-market.vercel.app
-- **Backend API:** https://mrnibras-local-market-1.onrender.com
+<p align="center">
+  <a href="https://mr-nibras-local-market.vercel.app" style="margin-right: 10px;">
+    <img src="https://img.shields.io/badge/🌐_Live_Demo-Frontend-0078D4?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Frontend">
+  </a>
+  <a href="https://mrnibras-local-market-1.onrender.com">
+    <img src="https://img.shields.io/badge/🔌_Live_API-Backend-4353FF?style=for-the-badge&logo=render&logoColor=white" alt="Live Backend">
+  </a>
+</p>
 
-**Status:** Production Ready | **Node.js** | **MongoDB** | **MIT License**
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node">
+  <img src="https://img.shields.io/badge/MongoDB-6%2B-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License">
+</p>
 
 ---
 
