@@ -1,7 +1,34 @@
-🚀 Local Link API - Complete Marketplace Backend
-A production-ready, enterprise-grade local services marketplace backend with real-time chat, payment processing, offer negotiation, and advanced analytics.
+🚀 Local Link — Complete Local Services Marketplace
 
-Status Node MongoDB License
+> A production-ready full-stack local services marketplace with real-time chat, payment processing, offer negotiation, and advanced analytics.
+
+**🔴 Live Demo:**
+- **Frontend:** https://mr-nibras-local-market.vercel.app
+- **Backend API:** https://mrnibras-local-market-1.onrender.com
+
+**Status:** Production Ready | **Node.js** | **MongoDB** | **MIT License**
+
+---
+
+## 🎬 Quick Demo
+
+### Try it live at: https://mr-nibras-local-market.vercel.app
+
+**Demo Account Credentials:**
+| Role | Email | Password |
+|------|-------|----------|
+| Customer | `demo@customer.com` | `password123` |
+| Provider | `provider1@example.com` | `password123` |
+
+**What you can try:**
+- ✅ Browse 40+ sample services across 8 categories
+- ✅ Search & filter services by category
+- ✅ View provider profiles and ratings
+- ✅ Book a service (as customer)
+- ✅ Accept bookings (as provider)
+- ✅ Leave reviews and ratings
+- ✅ Real-time chat with providers
+- ✅ Create your own services (register as provider)
 
 📋 Table of Contents
 Features

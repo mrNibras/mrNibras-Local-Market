@@ -372,6 +372,18 @@ const seedDatabase = async () => {
 
     // Create sample providers
     const providers = [];
+    
+    // Create demo customer account
+    await User.create({
+      name: 'Demo Customer',
+      email: 'demo@customer.com',
+      password: await bcrypt.hash('password123', 10),
+      role: 'customer',
+      isVerified: true,
+      phone: '+1234567890'
+    });
+    console.log('✅ Created demo customer account');
+    
     for (let i = 0; i < 20; i++) {
       const provider = await User.create({
         name: `Provider ${i + 1}`,
