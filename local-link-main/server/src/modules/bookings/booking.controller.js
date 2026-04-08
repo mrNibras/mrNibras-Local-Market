@@ -1,5 +1,7 @@
 import { asyncHandler } from '../../shared/middleware/error.middleware.js';
 import * as bookingService from './booking.service.js';
+import * as telegramService from '../../shared/utils/telegram.js';
+import * as emailNotifications from '../../shared/utils/email-notifications.js';
 import { paginationValidator } from '../../shared/utils/validators.js';
 import logger from '../../shared/utils/logger.js';
 
