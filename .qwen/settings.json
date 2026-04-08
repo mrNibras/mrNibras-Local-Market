@@ -12,7 +12,8 @@
       "Bash(tee *)",
       "Bash(nohup *)",
       "Bash(bash *)",
-      "Bash(convert *)"
+      "Bash(convert *)",
+      "Bash(grep *)"
     ]
   },
   "$version": 3

@@ -9,6 +9,8 @@ import ServiceDetail from "./pages/ServiceDetail.tsx";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
+import MyServices from "./pages/MyServices.tsx";
 import Profile from "./pages/Profile.tsx";
 import Calendar from "./pages/Calendar.tsx";
 import Messages from "./pages/Messages.tsx";
@@ -32,9 +34,11 @@ const App = () => (
           <Route path="/bookings/:id" element={<BookingPage />} />
           <Route path="/contact/:id" element={<ContactPage />} />
           <Route path="/create-service" element={<CreateService />} />
+          <Route path="/my-services" element={<MyServices />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/messages" element={<Messages />} />

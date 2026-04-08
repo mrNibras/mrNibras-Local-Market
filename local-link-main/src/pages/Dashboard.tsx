@@ -133,9 +133,14 @@ export default function Dashboard() {
                   <h2 className="font-semibold text-lg">Ready to offer your services?</h2>
                   <p className="text-muted-foreground">Create a new service listing to reach customers</p>
                 </div>
-                <Button onClick={() => navigate("/create-service")}>
-                  Create Service
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" onClick={() => navigate("/my-services")}>
+                    View My Services
+                  </Button>
+                  <Button onClick={() => navigate("/create-service")}>
+                    Create Service
+                  </Button>
+                </div>
               </div>
             </div>
           )}
