@@ -1,5 +1,7 @@
 import { asyncHandler } from '../../shared/middleware/error.middleware.js';
 import * as messageService from './message.service.js';
+import * as telegramService from '../../shared/utils/telegram.js';
+import * as emailNotifications from '../../shared/utils/email-notifications.js';
 import logger from '../../shared/utils/logger.js';
 
 /**
@@ -20,6 +22,50 @@ export const sendMessage = asyncHandler(async (req, res) => {
   );
 
   logger.info(`Message sent: ${message._id}`);
+
+  // Send notifications to provider (non-blocking)
+  try {
+    // Get sender and recipient info
+    const User = (await import('../users/user.model.js')).default;
+    const sender = await User.findById(req.user.id);
+    const recipient_user = await User.findById(recipient);
+    let serviceInfo = null;
+    if (service) {
+      const Service = (await import('../services/service.model.js')).default;
+      serviceInfo = await Service.findById(service);
+    }
+
+    if (recipient_user) {
+      // Send Telegram notification
+      if (recipient_user.telegramChatId) {
+        telegramService.sendMessageNotification({
+          providerChatId: recipient_user.telegramChatId,
+          providerName: recipient_user.name,
+          customerName: sender?.name || 'Customer',
+          serviceTitle: serviceInfo?.title || 'Service',
+          subject: subject || 'New Message',
+          message: content,
+          messageId: message._id.toString()
+        }).catch(err => logger.error(`Telegram notification failed: ${err.message}`));
+      }
+
+      // Send Email notification
+      if (recipient_user.email) {
+        emailNotifications.sendMessageNotificationEmail({
+          providerEmail: recipient_user.email,
+          providerName: recipient_user.name,
+          customerName: sender?.name || 'Customer',
+          customerEmail: sender?.email || '',
+          serviceTitle: serviceInfo?.title || 'Service',
+          subject: subject || 'New Message',
+          message: content,
+          messageId: message._id.toString()
+        }).catch(err => logger.error(`Email notification failed: ${err.message}`));
+      }
+    }
+  } catch (error) {
+    logger.error(`Message notification error: ${error.message}`);
+  }
 
   res.status(201).json({
     success: true,

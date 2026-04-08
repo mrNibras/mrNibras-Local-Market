@@ -19,6 +19,51 @@ export const createBooking = asyncHandler(async (req, res) => {
 
   logger.info(`Booking created: ${booking._id}`);
 
+  // Send notifications to provider (non-blocking)
+  try {
+    // Get provider info
+    const User = (await import('../users/user.model.js')).default;
+    const provider = await User.findById(booking.provider);
+    const customer = await User.findById(booking.customer);
+    const Service = (await import('../services/service.model.js')).default;
+    const service = await Service.findById(booking.service);
+
+    if (provider) {
+      // Send Telegram notification
+      if (provider.telegramChatId) {
+        telegramService.sendBookingConfirmation({
+          providerChatId: provider.telegramChatId,
+          providerName: provider.name,
+          customerName: customer?.name || 'Customer',
+          serviceTitle: service?.title || 'Service',
+          bookingDate: booking.bookingDate,
+          duration: booking.duration,
+          price: booking.price,
+          bookingId: booking._id.toString(),
+          notes: booking.notes
+        }).catch(err => logger.error(`Telegram notification failed: ${err.message}`));
+      }
+
+      // Send Email notification
+      if (provider.email) {
+        emailNotifications.sendBookingConfirmationEmail({
+          providerEmail: provider.email,
+          providerName: provider.name,
+          customerName: customer?.name || 'Customer',
+          customerEmail: customer?.email || '',
+          serviceTitle: service?.title || 'Service',
+          bookingDate: booking.bookingDate,
+          duration: booking.duration,
+          price: booking.price,
+          bookingId: booking._id.toString(),
+          notes: booking.notes
+        }).catch(err => logger.error(`Email notification failed: ${err.message}`));
+      }
+    }
+  } catch (error) {
+    logger.error(`Notification error: ${error.message}`);
+  }
+
   res.status(201).json({
     success: true,
     message: 'Booking created successfully',

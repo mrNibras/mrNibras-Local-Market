@@ -121,6 +121,16 @@ const userSchema = new mongoose.Schema({
     enum: ['top_rated', 'rising_talent', 'fast_responder', 'verified', 'super_provider']
   }],
 
+  // Telegram integration
+  telegramChatId: {
+    type: String,
+    sparse: true
+  },
+
+  telegramUsername: {
+    type: String
+  },
+
   // Refresh token for session management
   refreshToken: {
     type: String,
