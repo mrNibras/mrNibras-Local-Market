@@ -101,13 +101,12 @@ const serviceSchema = new mongoose.Schema({
 });
 
 // Indexes for performance
-serviceSchema.index({ provider: 1 });
-serviceSchema.index({ category: 1 });
 serviceSchema.index({ location: '2dsphere' });
-serviceSchema.index({ title: 'text', description: 'text' });
 serviceSchema.index({ price: 1 });
 serviceSchema.index({ averageRating: -1 });
 serviceSchema.index({ createdAt: -1 });
+// Index for text search
+serviceSchema.index({ title: 'text', description: 'text', tags: 'text' });
 
 // Virtual for reviews
 serviceSchema.virtual('reviews', {
@@ -122,9 +121,6 @@ serviceSchema.virtual('bookings', {
   foreignField: 'service',
   localField: '_id'
 });
-
-// Index for text search
-serviceSchema.index({ title: 'text', description: 'text', tags: 'text' });
 
 // Pre-save middleware to ensure provider is a service provider
 serviceSchema.pre('save', async function(next) {
@@ -188,6 +184,36 @@ serviceSchema.statics.findNearLocation = function(coordinates, maxDistance = 500
       }
     }
   });
+};
+
+/**
+ * Static method to search services using MongoDB text search
+ * @param {string} query - The search term
+ * @param {Object} options - Pagination options
+ * @returns {Promise<Object>}
+ */
+serviceSchema.statics.search = async function(query, options = {}) {
+  const { page = 1, limit = 10 } = options;
+  const skip = (page - 1) * limit;
+
+  const filter = {
+    $text: { $search: query },
+    isActive: true
+  };
+
+  const [services, total] = await Promise.all([
+    this.find(filter, { score: { $meta: 'textScore' } })
+      .sort({ score: { $meta: 'textScore' } })
+      .skip(skip)
+      .limit(limit)
+      .populate('provider', 'name profileImage'),
+    this.countDocuments(filter)
+  ]);
+
+  return {
+    data: services,
+    total
+  };
 };
 
 export default mongoose.model('Service', serviceSchema);
