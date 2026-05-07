@@ -152,7 +152,7 @@ const sampleServices = {
       price: 80,
       rating: 4.9,
       reviews: 156,
-      image: 'https://plus.unsplash.com/premium_photo-1609697299491-69d2d5ed2c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fE1hdGglMjBUdXRvcmluZyUyMChBbGwlMjBMZXZlbHMpfGVufDB8fDB8fHww'
+      image: 'https://images.unsplash.com/photo-1609697299491-69d2d5ed2c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fE1hdGglMjBUdXRvcmluZyUyMChBbGwlMjBMZXZlbHMpfGVufDB8fDB8fHww'
     },
     {
       title: 'English & Writing Tutor',
