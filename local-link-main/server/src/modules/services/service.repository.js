@@ -182,34 +182,7 @@ export const findNearLocation = async (coordinates, maxDistance = 5000, filter =
  * @returns {Promise<Object>}
  */
 export const search = async (searchTerm, options = {}) => {
-  const { page = 1, limit = 10 } = options;
-  const skip = (page - 1) * limit;
-
-  const [services, total] = await Promise.all([
-    Service.find({
-      $text: { $search: searchTerm },
-      isActive: true
-    })
-    .sort({ score: { $meta: 'textScore' } })
-    .skip(skip)
-    .limit(limit),
-    Service.countDocuments({
-      $text: { $search: searchTerm },
-      isActive: true
-    })
-  ]);
-
-  return {
-    data: services,
-    pagination: {
-      page: parseInt(page),
-      limit: parseInt(limit),
-      total,
-      totalPages: Math.ceil(total / limit),
-      hasNext: page * limit < total,
-      hasPrev: page > 1
-    }
-  };
+  return await Service.search(searchTerm, options);
 };
 
 /**

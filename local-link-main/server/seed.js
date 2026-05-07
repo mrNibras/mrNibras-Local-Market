@@ -367,7 +367,7 @@ const seedDatabase = async () => {
 
     // Clear existing data
     await Service.deleteMany({});
-    await User.deleteMany({}); // Clear all users (both providers and customers)
+    await User.deleteMany({});
     console.log('🗑️  Cleared existing services and users');
 
     // Create sample providers

@@ -203,11 +203,12 @@ export const findServicesNearLocation = async (coordinates, queryParams) => {
  * @returns {Promise<Object>}
  */
 export const searchServices = async (searchTerm, queryParams) => {
-  const { page, limit } = queryParams;
+  const { page, limit, ...filters } = queryParams;
 
   const result = await serviceRepository.search(searchTerm, {
     page: page || 1,
-    limit: limit || 10
+    limit: limit || 10,
+    ...filters
   });
 
   return result;

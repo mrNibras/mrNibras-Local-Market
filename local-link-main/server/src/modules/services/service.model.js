@@ -193,11 +193,12 @@ serviceSchema.statics.findNearLocation = function(coordinates, maxDistance = 500
  * @returns {Promise<Object>}
  */
 serviceSchema.statics.search = async function(query, options = {}) {
-  const { page = 1, limit = 10 } = options;
+  const { page = 1, limit = 10, ...extraFilters } = options;
   const skip = (page - 1) * limit;
 
   const filter = {
     $text: { $search: query },
+    ...extraFilters,
     isActive: true
   };
 
@@ -212,7 +213,14 @@ serviceSchema.statics.search = async function(query, options = {}) {
 
   return {
     data: services,
-    total
+    pagination: {
+      page: parseInt(page),
+      limit: parseInt(limit),
+      total,
+      totalPages: Math.ceil(total / limit),
+      hasNext: page * limit < total,
+      hasPrev: page > 1
+    }
   };
 };
 

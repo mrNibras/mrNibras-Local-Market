@@ -1,5 +1,7 @@
 import { asyncHandler } from '../../shared/middleware/error.middleware.js';
 import * as serviceService from './service.service.js';
+import Service from './service.model.js';
+import APIFeatures from '../../shared/utils/apiFeatures.js';
 import { paginationValidator } from '../../shared/utils/validators.js';
 import logger from '../../shared/utils/logger.js';
 
@@ -29,12 +31,16 @@ export const createService = asyncHandler(async (req, res) => {
  * GET /api/services
  */
 export const getAllServices = asyncHandler(async (req, res) => {
-  const services = await serviceService.getAllServices(req.query);
+  const features = new APIFeatures(Service.find(), req.query)
+    .filter()
+    .advancedFilter()
+    .sort()
+    .paginate()
+    .populate([{ path: 'provider', select: 'name profileImage averageRating' }]);
 
-  res.status(200).json({
-    success: true,
-    ...services
-  });
+  const result = await features.getPaginatedResponse();
+  
+  res.status(200).json(result);
 });
 
 /**
