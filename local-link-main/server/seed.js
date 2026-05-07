@@ -26,7 +26,7 @@ const sampleServices = {
       price: 150,
       rating: 4.8,
       reviews: 45,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGx1bWJpbmclMjBQcm9mZXNzaW9uYWwlMjBQaXBlJTIwUmVwYWlyfGVufDB8fDB8fHww'
     },
     {
       title: 'Water Heater Installation',
@@ -34,7 +34,7 @@ const sampleServices = {
       price: 450,
       rating: 4.9,
       reviews: 32,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1664298589198-b15ff5382648?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGx1bWJpbmclMjBXYXRlciUyMEhlYXRlciUyMEluc3RhbGxhdGlvbnxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Drain Cleaning Service',
@@ -42,7 +42,7 @@ const sampleServices = {
       price: 120,
       rating: 4.7,
       reviews: 58,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/1422121660/photo/hand-in-orange-gloves-holds-many-hair-loss-on-filter-in-washbasin-while-cleaning.webp?a=1&b=1&s=612x612&w=0&k=20&c=YWH0O7-QUMOMy_cx2XPpZy-d9EgrHFOcYt0QzhqcZ6Q='
     },
     {
       title: 'Bathroom Fixture Installation',
@@ -50,7 +50,7 @@ const sampleServices = {
       price: 200,
       rating: 4.6,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGx1bWJpbmclMjBCYXRocm9vbSUyMEZpeHR1cmUlMjBJbnN0YWxsYXRpb258ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Leak Detection & Repair',
@@ -58,7 +58,7 @@ const sampleServices = {
       price: 180,
       rating: 4.9,
       reviews: 41,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/2252282659/photo/close-up-of-water-leak-detector-sensor-alert-on-leaking-outdoor-tap-in-garden.webp?a=1&b=1&s=612x612&w=0&k=20&c=QBsCv5RSK91oVCYOMJsDzKxheX4evcJI6HcfDDkGN1Y='
     }
   ],
   electrical: [
@@ -68,7 +68,7 @@ const sampleServices = {
       price: 500,
       rating: 4.8,
       reviews: 36,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1557516300-46e218a6961f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZWxlY3RyaWNhbCUyMEhvbWUlMjBXaXJpbmclMjBJbnN0YWxsYXRpb258ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Electrical Panel Upgrade',
@@ -76,7 +76,7 @@ const sampleServices = {
       price: 800,
       rating: 4.9,
       reviews: 24,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/1469656864/photo/electrician-engineer-uses-a-multimeter-to-test-the-electrical-installation-and-power-line.webp?a=1&b=1&s=612x612&w=0&k=20&c=eDdOgrMY7RUNadSSchLwiaDGzHV8vUEt0soJ0Q0Fltk='
     },
     {
       title: 'Lighting Installation',
@@ -84,7 +84,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 52,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1661908782924-de673a5c6988?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZWxlY3RyaWNhbCUyMExpZ2h0aW5nJTIwSW5zdGFsbGF0aW9ufGVufDB8fDB8fHww'
     },
     {
       title: 'Outlet & Switch Repair',
@@ -92,7 +92,7 @@ const sampleServices = {
       price: 100,
       rating: 4.6,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1683127814960-3a97c4f0d882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZWxlY3RyaWNhbCUyME91dGxldCUyMCUyNiUyMFN3aXRjaCUyMFJlcGFpcnxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Emergency Electrical Service',
@@ -100,7 +100,7 @@ const sampleServices = {
       price: 250,
       rating: 4.9,
       reviews: 89,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1596814150734-a0c84168a01d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVsZWN0cmljYWwlMjBFbWVyZ2VuY3klMjBwdWxsfGVufDB8fDB8fHww'
     }
   ],
   cleaning: [
@@ -110,7 +110,7 @@ const sampleServices = {
       price: 300,
       rating: 4.8,
       reviews: 124,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1678980766527-b33a383238ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2xlYW5pbmclMjBEZWVwJTIwSG91c2UlMjBDbGVhbmluZ3xlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Office Cleaning Service',
@@ -118,7 +118,7 @@ const sampleServices = {
       price: 400,
       rating: 4.7,
       reviews: 56,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1683141112334-d7d404f6e716?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2xlYW5pbmclMjBPZmZpY2UlMjBDbGVhbmluZyUyMFNlcnZpY2V8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Carpet Cleaning',
@@ -126,7 +126,7 @@ const sampleServices = {
       price: 200,
       rating: 4.6,
       reviews: 78,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1742483359033-13315b247c74?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xlYW5pbmclMjBDYXJwZXQlMjBDbGVhbmluZ3xlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Window Cleaning',
@@ -134,7 +134,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 92,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1635445818409-64a0ff92eb39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNsZWFuaW5nJTIwV2luZG93JTIwQ2xlYW5pbmd8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Move-In/Move-Out Cleaning',
@@ -142,7 +142,7 @@ const sampleServices = {
       price: 350,
       rating: 4.9,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1581578949510-fa7315c4c350?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TW92ZS1JbiUyRk1vdmUtT3V0JTIwQ2xlYW5pbmd8ZW58MHx8MHx8fDA%3D'
     }
   ],
   tutoring: [
@@ -152,7 +152,7 @@ const sampleServices = {
       price: 80,
       rating: 4.9,
       reviews: 156,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1609697299491-69d2d5ed2c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fE1hdGglMjBUdXRvcmluZyUyMChBbGwlMjBMZXZlbHMpfGVufDB8fDB8fHww'
     },
     {
       title: 'English & Writing Tutor',
@@ -160,7 +160,7 @@ const sampleServices = {
       price: 75,
       rating: 4.8,
       reviews: 98,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/1478130206/photo/woman-teaching-child-writing-and-learning-for-home-assessment-test-and-memory-development-at.webp?a=1&b=1&s=612x612&w=0&k=20&c=NiqnVF5RYp9KvhJnZiDifbfAGoWqTPNlY5GCcxbfzcs='
     },
     {
       title: 'Science Tutoring',
@@ -168,7 +168,7 @@ const sampleServices = {
       price: 85,
       rating: 4.7,
       reviews: 72,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1758685734062-165cc0094e61?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFNjaWVuY2UlMjBUdXRvcmluZ3xlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Language Lessons',
@@ -176,7 +176,7 @@ const sampleServices = {
       price: 90,
       rating: 4.9,
       reviews: 134,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1673515334717-da4d85aaf38b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TGFuZ3VhZ2UlMjBMZXNzb25zJyUyQyUyMGRlc2NyaXB0aW9uJTNBJTIwJ1NwYW5pc2glMkMlMjBGcmVuY2glMkMlMjBvciUyME1hbmRhcmluJTIwbGVzc29ucy4lMjBOYXRpdmUlMjBzcGVha2VycyUyMGF2YWlsYWJsZS58ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Test Prep (SAT/ACT)',
@@ -184,7 +184,7 @@ const sampleServices = {
       price: 120,
       rating: 4.9,
       reviews: 87,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/949490402/photo/pencil-sharpener-and-eraser-on-answer-sheets-or-standardized-test-form-with-answers-bubbled.webp?a=1&b=1&s=612x612&w=0&k=20&c=mK9ggaobs75O3pDxzNnwq7ySiPZ843-H2k1oHGV4a34='
     }
   ],
   painting: [
@@ -194,7 +194,7 @@ const sampleServices = {
       price: 600,
       rating: 4.8,
       reviews: 45,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1717281234297-3def5ae3eee1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBhaW50aW5nJTIwSW50ZXJpb3IlMjBIb3VzZSUyMFBhaW50aW5nJyUyQyUyMGRlc2NyaXB0aW9uJTNBJTIwJ1Byb2Zlc3Npb25hbCUyMGludGVyaW9yJTIwcGFpbnRpbmclMjBzZXJ2aWNlcy4lMjBRdWFsaXR5JTIwcGFpbnRzJTIwYW5kJTIwbWV0aWN1bG91c3xlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Exterior Painting',
@@ -202,7 +202,7 @@ const sampleServices = {
       price: 1200,
       rating: 4.7,
       reviews: 32,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFpbnRpbmclMjBFeHRlcmlvciUyMFBhaW50aW5nJyUyQyUyMGRlc2NyaXB0aW9uJTNBJTIwJ1Byb3RlY3QlMjBhbmQlMjBiZWF1dGlmeSUyMHlvdXIlMjBob21lJTIwZXh0ZXJpb3IuJTIwV2VhdGhlci1yZXNpc3RhbnQlMjBwYWludHMlMjB1c2VkLnxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Cabinet Painting',
@@ -210,7 +210,7 @@ const sampleServices = {
       price: 800,
       rating: 4.6,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1664303816628-2c3f28be369d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGFpbnRpbmclMjBDYWJpbmV0JTIwUGFpbnRpbmcnJTJDJTIwZGVzY3JpcHRpb24lM0ElMjAnVHJhbnNmb3JtJTIweW91ciUyMGtpdGNoZW4lMjB3aXRoJTIwY2FiaW5ldCUyMHBhaW50aW5nJTIwb3IlMjByZWZpbmlzaGluZy4lMjBDb3N0LWVmZmVjdGl2ZSUyMHVwZGF0ZXxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Wallpaper Installation',
@@ -218,7 +218,7 @@ const sampleServices = {
       price: 400,
       rating: 4.5,
       reviews: 19,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1661964258975-033bfdf1e573?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBhaW50aW5nJTIwV2FsbHBhcGVyJTIwSW5zdGFsbGF0aW9uJyUyQyUyMGRlc2NyaXB0aW9uJTNBJTIwJ1Byb2Zlc3Npb25hbCUyMHdhbGxwYXBlciUyMGhhbmdpbmclMjBhbmQlMjByZW1vdmFsLiUyMEFsbCUyMHR5cGVzJTIwb2YlMjB3YWxscGFwZXJ8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Deck & Fence Staining',
@@ -226,7 +226,7 @@ const sampleServices = {
       price: 500,
       rating: 4.7,
       reviews: 36,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1748908271581-b701ab3ad25e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGVjayUyMCUyNiUyMEZlbmNlJTIwU3RhaW5pbmcnJTJDJTIwZGVzY3JpcHRpb24lM0ElMjAnUHJvdGVjdCUyMGFuZCUyMGVuaGFuY2UlMjB5b3VyJTIwZGVjayUyMG9yJTIwZmVuY2UlMjB3aXRoJTIwcHJvZmVzc2lvbmFsJTIwc3RhaW5pbmd8ZW58MHx8MHx8fDA%3D'
     }
   ],
   carpentry: [
