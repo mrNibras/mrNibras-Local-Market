@@ -26,7 +26,7 @@ const sampleServices = {
       price: 150,
       rating: 4.8,
       reviews: 45,
-      image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Water Heater Installation',
@@ -34,7 +34,7 @@ const sampleServices = {
       price: 450,
       rating: 4.9,
       reviews: 32,
-      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Drain Cleaning Service',
@@ -42,7 +42,7 @@ const sampleServices = {
       price: 120,
       rating: 4.7,
       reviews: 58,
-      image: 'https://images.unsplash.com/photo-1581244277943-fe4a9675d413?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Bathroom Fixture Installation',
@@ -50,7 +50,7 @@ const sampleServices = {
       price: 200,
       rating: 4.6,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1552321901-9762e65e6f55?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Leak Detection & Repair',
@@ -58,7 +58,7 @@ const sampleServices = {
       price: 180,
       rating: 4.9,
       reviews: 41,
-      image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   electrical: [
@@ -68,7 +68,7 @@ const sampleServices = {
       price: 500,
       rating: 4.8,
       reviews: 36,
-      image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Electrical Panel Upgrade',
@@ -76,7 +76,7 @@ const sampleServices = {
       price: 800,
       rating: 4.9,
       reviews: 24,
-      image: 'https://images.unsplash.com/photo-1558402529-d2aa4a85218b?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Lighting Installation',
@@ -84,7 +84,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 52,
-      image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Outlet & Switch Repair',
@@ -92,7 +92,7 @@ const sampleServices = {
       price: 100,
       rating: 4.6,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1558402529-d2aa4a85218b?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Emergency Electrical Service',
@@ -100,7 +100,7 @@ const sampleServices = {
       price: 250,
       rating: 4.9,
       reviews: 89,
-      image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   cleaning: [
@@ -110,7 +110,7 @@ const sampleServices = {
       price: 300,
       rating: 4.8,
       reviews: 124,
-      image: 'https://images.unsplash.com/photo-1581578731117-104f2a8d23e9?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Office Cleaning Service',
@@ -118,7 +118,7 @@ const sampleServices = {
       price: 400,
       rating: 4.7,
       reviews: 56,
-      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Carpet Cleaning',
@@ -126,7 +126,7 @@ const sampleServices = {
       price: 200,
       rating: 4.6,
       reviews: 78,
-      image: 'https://images.unsplash.com/photo-1558402529-d2aa4a85218b?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Window Cleaning',
@@ -134,7 +134,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 92,
-      image: 'https://images.unsplash.com/photo-1527515664-61856e7ccf1b?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Move-In/Move-Out Cleaning',
@@ -142,7 +142,7 @@ const sampleServices = {
       price: 350,
       rating: 4.9,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1581578731117-104f2a8d23e9?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   tutoring: [
@@ -152,7 +152,7 @@ const sampleServices = {
       price: 80,
       rating: 4.9,
       reviews: 156,
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'English & Writing Tutor',
@@ -160,7 +160,7 @@ const sampleServices = {
       price: 75,
       rating: 4.8,
       reviews: 98,
-      image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Science Tutoring',
@@ -168,7 +168,7 @@ const sampleServices = {
       price: 85,
       rating: 4.7,
       reviews: 72,
-      image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Language Lessons',
@@ -176,7 +176,7 @@ const sampleServices = {
       price: 90,
       rating: 4.9,
       reviews: 134,
-      image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Test Prep (SAT/ACT)',
@@ -184,7 +184,7 @@ const sampleServices = {
       price: 120,
       rating: 4.9,
       reviews: 87,
-      image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   painting: [
@@ -194,7 +194,7 @@ const sampleServices = {
       price: 600,
       rating: 4.8,
       reviews: 45,
-      image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Exterior Painting',
@@ -202,7 +202,7 @@ const sampleServices = {
       price: 1200,
       rating: 4.7,
       reviews: 32,
-      image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Cabinet Painting',
@@ -210,7 +210,7 @@ const sampleServices = {
       price: 800,
       rating: 4.6,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Wallpaper Installation',
@@ -218,7 +218,7 @@ const sampleServices = {
       price: 400,
       rating: 4.5,
       reviews: 19,
-      image: 'https://images.unsplash.com/photo-1615529182904-14819c35db37?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Deck & Fence Staining',
@@ -226,7 +226,7 @@ const sampleServices = {
       price: 500,
       rating: 4.7,
       reviews: 36,
-      image: 'https://images.unsplash.com/photo-1595846519845-68e298c2edd8?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   carpentry: [
@@ -236,7 +236,7 @@ const sampleServices = {
       price: 800,
       rating: 4.9,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Door Installation & Repair',
@@ -244,7 +244,7 @@ const sampleServices = {
       price: 250,
       rating: 4.7,
       reviews: 54,
-      image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Cabinet Installation',
@@ -252,7 +252,7 @@ const sampleServices = {
       price: 600,
       rating: 4.8,
       reviews: 42,
-      image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Deck Building',
@@ -260,7 +260,7 @@ const sampleServices = {
       price: 2000,
       rating: 4.9,
       reviews: 31,
-      image: 'https://images.unsplash.com/photo-1595846519845-68e298c2edd8?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Trim & Molding Installation',
@@ -268,7 +268,7 @@ const sampleServices = {
       price: 400,
       rating: 4.6,
       reviews: 38,
-      image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   gardening: [
@@ -278,7 +278,7 @@ const sampleServices = {
       price: 100,
       rating: 4.7,
       reviews: 89,
-      image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Landscape Design',
@@ -286,7 +286,7 @@ const sampleServices = {
       price: 800,
       rating: 4.8,
       reviews: 34,
-      image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Tree Trimming & Removal',
@@ -294,7 +294,7 @@ const sampleServices = {
       price: 400,
       rating: 4.6,
       reviews: 56,
-      image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb7d5fa5?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Garden Bed Installation',
@@ -302,7 +302,7 @@ const sampleServices = {
       price: 350,
       rating: 4.7,
       reviews: 42,
-      image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Irrigation System Installation',
@@ -310,7 +310,7 @@ const sampleServices = {
       price: 1200,
       rating: 4.8,
       reviews: 27,
-      image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ],
   moving: [
@@ -320,7 +320,7 @@ const sampleServices = {
       price: 600,
       rating: 4.7,
       reviews: 156,
-      image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Long Distance Moving',
@@ -328,7 +328,7 @@ const sampleServices = {
       price: 2500,
       rating: 4.6,
       reviews: 78,
-      image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Packing Service',
@@ -336,7 +336,7 @@ const sampleServices = {
       price: 400,
       rating: 4.8,
       reviews: 92,
-      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Furniture Assembly',
@@ -344,7 +344,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 134,
-      image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     },
     {
       title: 'Storage Solutions',
@@ -352,7 +352,7 @@ const sampleServices = {
       price: 200,
       rating: 4.5,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800'
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
     }
   ]
 };
