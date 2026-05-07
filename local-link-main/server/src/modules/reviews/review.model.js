@@ -10,8 +10,7 @@ const reviewSchema = new mongoose.Schema({
   service: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Service',
-    required: [true, 'Service is required'],
-    index: true
+    required: [true, 'Service is required']
   },
 
   booking: {
@@ -21,8 +20,7 @@ const reviewSchema = new mongoose.Schema({
 
   provider: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    index: true
+    ref: 'User'
   },
 
   rating: {

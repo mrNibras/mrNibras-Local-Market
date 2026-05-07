@@ -4,8 +4,7 @@ const serviceSchema = new mongoose.Schema({
   provider: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, 'Provider is required'],
-    index: true
+    required: [true, 'Provider is required']
   },
 
   title: {
@@ -26,8 +25,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Category is required'],
     trim: true,
-    lowercase: true,
-    index: true
+    lowercase: true
   },
 
   price: {
@@ -101,8 +99,6 @@ const serviceSchema = new mongoose.Schema({
 });
 
 // Indexes for performance
-serviceSchema.index({ location: '2dsphere' });
-serviceSchema.index({ price: 1 });
 serviceSchema.index({ averageRating: -1 });
 serviceSchema.index({ createdAt: -1 });
 // Index for text search
@@ -192,19 +188,19 @@ serviceSchema.statics.findNearLocation = function(coordinates, maxDistance = 500
  * @param {Object} options - Pagination options
  * @returns {Promise<Object>}
  */
-serviceSchema.statics.search = async function(query, options = {}) {
-  const { page = 1, limit = 10, ...extraFilters } = options;
+serviceSchema.statics.search = async function(query, filters = {}, options = {}) {
+  const { page = 1, limit = 10, sort = { score: { $meta: 'textScore' } } } = options;
   const skip = (page - 1) * limit;
 
   const filter = {
     $text: { $search: query },
-    ...extraFilters,
+    ...filters,
     isActive: true
   };
 
   const [services, total] = await Promise.all([
     this.find(filter, { score: { $meta: 'textScore' } })
-      .sort({ score: { $meta: 'textScore' } })
+      .sort(sort)
       .skip(skip)
       .limit(limit)
       .populate('provider', 'name profileImage'),

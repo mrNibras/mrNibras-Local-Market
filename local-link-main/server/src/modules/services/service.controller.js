@@ -147,22 +147,24 @@ export const findServicesNearLocation = asyncHandler(async (req, res) => {
  * GET /api/services/search
  */
 export const searchServices = asyncHandler(async (req, res) => {
-  const { q, ...queryParams } = req.query;
+  const { q } = req.query;
 
   if (!q) {
-    return res.status(400).json({
-      success: false,
-      message: 'Search query is required',
-      errorCode: 'MISSING_QUERY'
-    });
+    throw new BadRequestError('Search query is required', 'MISSING_QUERY');
   }
 
-  const services = await serviceService.searchServices(q, queryParams);
+  const features = new APIFeatures(
+    Service.find({ $text: { $search: q } }, { score: { $meta: 'textScore' } }),
+    req.query
+  )
+    .filter()
+    .advancedFilter()
+    .sort()
+    .paginate()
+    .populate([{ path: 'provider', select: 'name profileImage averageRating' }]);
 
-  res.status(200).json({
-    success: true,
-    ...services
-  });
+  const result = await features.getPaginatedResponse();
+  res.status(200).json(result);
 });
 
 /**

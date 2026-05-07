@@ -98,34 +98,10 @@ export const deleteService = async (serviceId, requesterId) => {
  * @returns {Promise<Object>}
  */
 export const getAllServices = async (queryParams) => {
-  const {
-    category,
-    provider,
-    minPrice,
-    maxPrice,
-    minRating,
-    isActive,
-    page,
-    limit,
-    sort
-  } = queryParams;
-
-  const filter = {};
-
-  if (category) filter.category = category;
-  if (provider) filter.provider = provider;
-  if (isActive !== undefined) filter.isActive = isActive === 'true';
-  else filter.isActive = true; // Default to active services only
-
-  if (minPrice !== undefined || maxPrice !== undefined) {
-    filter.price = {};
-    if (minPrice !== undefined) filter.price.$gte = parseFloat(minPrice);
-    if (maxPrice !== undefined) filter.price.$lte = parseFloat(maxPrice);
-  }
-
-  if (minRating !== undefined) {
-    filter.averageRating = { $gte: parseFloat(minRating) };
-  }
+  const { page, limit, sort, ...filter } = queryParams;
+  
+  // Set default filter for active services if not specified
+  if (filter.isActive === undefined) filter.isActive = true;
 
   const result = await serviceRepository.findAll(filter, {
     page: page || 1,
