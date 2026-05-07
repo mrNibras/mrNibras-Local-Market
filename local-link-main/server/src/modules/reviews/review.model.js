@@ -105,8 +105,6 @@ const reviewSchema = new mongoose.Schema({
 
 // Indexes
 reviewSchema.index({ user: 1 });
-reviewSchema.index({ service: 1 });
-reviewSchema.index({ provider: 1 });
 reviewSchema.index({ rating: 1 });
 reviewSchema.index({ createdAt: -1 });
 reviewSchema.index({ service: 1, rating: 1 });
