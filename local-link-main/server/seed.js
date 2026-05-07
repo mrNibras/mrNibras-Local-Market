@@ -236,7 +236,7 @@ const sampleServices = {
       price: 800,
       rating: 4.9,
       reviews: 28,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1631396326646-c06a935ff3a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FycGVudHJ5JTIwQ3VzdG9tJTIwRnVybml0dXJlJTIwQnVpbGRpbmclMjBIYW5kY3JhZnRlZCUyMGN1c3RvbSUyMGZ1cm5pdHVyZSUyMG1hZGUlMjB0byUyMHlvdXIlMjBzcGVjaWZpY2F0aW9ucy4lMjBRdWFsaXR5JTIwaGFyZHdvb2R8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Door Installation & Repair',
@@ -244,7 +244,7 @@ const sampleServices = {
       price: 250,
       rating: 4.7,
       reviews: 54,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1536160885591-301854e2ed04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnBlbnRyeSUyMERvb3IlMjBJbnN0YWxsYXRpb24lMjAlMjYlMjBSZXBhaXJ8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Cabinet Installation',
@@ -252,7 +252,7 @@ const sampleServices = {
       price: 600,
       rating: 4.8,
       reviews: 42,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1683133825889-7f8dd0b5817f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FycGVudHJ5JTIwQ2FiaW5ldCUyMEluc3RhbGxhdGlvbnxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Deck Building',
@@ -260,7 +260,7 @@ const sampleServices = {
       price: 2000,
       rating: 4.9,
       reviews: 31,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1656646549607-8fda5837a4ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FycGVudHJ5JTIwRGVjayUyMEJ1aWxkaW5nfGVufDB8fDB8fHww'
     },
     {
       title: 'Trim & Molding Installation',
@@ -268,7 +268,7 @@ const sampleServices = {
       price: 400,
       rating: 4.6,
       reviews: 38,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1683129664545-e977ddede93f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FycGVudHJ5JTIwVHJpbSUyMCUyNiUyME1vbGRpbmclMjBJbnN0YWxsYXRpb258ZW58MHx8MHx8fDA%3D'
     }
   ],
   gardening: [
@@ -278,7 +278,7 @@ const sampleServices = {
       price: 100,
       rating: 4.7,
       reviews: 89,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/1264145990/photo/gardener-trimming-grass-lawn-using-electric-cordless-mower.webp?a=1&b=1&s=612x612&w=0&k=20&c=MpwgQFu1B3r-HX-Ofh1s8GVX2OtR5oIVkJG-I0PEybM='
     },
     {
       title: 'Landscape Design',
@@ -286,7 +286,7 @@ const sampleServices = {
       price: 800,
       rating: 4.8,
       reviews: 34,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1714251842994-f32dbd50df66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2FyZGVuaW5nJTIwTGFuZHNjYXBlJTIwRGVzaWdufGVufDB8fDB8fHww'
     },
     {
       title: 'Tree Trimming & Removal',
@@ -294,7 +294,7 @@ const sampleServices = {
       price: 400,
       rating: 4.6,
       reviews: 56,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://media.istockphoto.com/id/1399726153/photo/man-trimming-decorative-trees-for-sale-in-garden-shop.webp?a=1&b=1&s=612x612&w=0&k=20&c=9ZtK4rLDYct0xToZmtAOfXXtbMHx4k959PGljj2XGkA='
     },
     {
       title: 'Garden Bed Installation',
@@ -302,7 +302,7 @@ const sampleServices = {
       price: 350,
       rating: 4.7,
       reviews: 42,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1678677946745-47819646a87e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8R2FyZGVuJTIwQmVkJTIwSW5zdGFsbGF0aW9ufGVufDB8fDB8fHww'
     },
     {
       title: 'Irrigation System Installation',
@@ -310,7 +310,7 @@ const sampleServices = {
       price: 1200,
       rating: 4.8,
       reviews: 27,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1588813888677-3e8cc72f8b0a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z2FyZGVuaW5nJTNBJTIwSXJyaWdhdGlvbiUyMFN5c3RlbSUyMEluc3RhbGxhdGlvbnxlbnwwfHwwfHx8MA%3D%3D'
     }
   ],
   moving: [
@@ -320,7 +320,7 @@ const sampleServices = {
       price: 600,
       rating: 4.7,
       reviews: 156,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1614359835514-92f8ba196357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aW5nJTNBJTIwTG9jYWwlMjBNb3ZpbmclMjBTZXJ2aWNlfGVufDB8fDB8fHww'
     },
     {
       title: 'Long Distance Moving',
@@ -328,7 +328,7 @@ const sampleServices = {
       price: 2500,
       rating: 4.6,
       reviews: 78,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1661409078904-42334551db0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW92aW5nJTNBJTIwTG9uZyUyMERpc3RhbmNlJTIwTW92aW5nfGVufDB8fDB8fHww'
     },
     {
       title: 'Packing Service',
@@ -336,7 +336,7 @@ const sampleServices = {
       price: 400,
       rating: 4.8,
       reviews: 92,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1600725935160-f67ee4f6084a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aW5nJTNBJTIwUGFja2luZyUyMFNlcnZpY2V8ZW58MHx8MHx8fDA%3D'
     },
     {
       title: 'Furniture Assembly',
@@ -344,7 +344,7 @@ const sampleServices = {
       price: 150,
       rating: 4.7,
       reviews: 134,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://images.unsplash.com/photo-1623043453741-11aef9cb59b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aW5nJTNBJTIwRnVybml0dXJlJTIwQXNzZW1ibHklMjBkZXNjcmlwdGlvbiUzQSUyMEFzc2VtYmx5JTIwb2YlMjBJS0VBJTIwYW5kJTIwb3RoZXIlMjBmdXJuaXR1cmUuJTIwUXVpY2slMjBhbmQlMjBlZmZpY2llbnQlMjBzZXJ2aWNlLnxlbnwwfHwwfHx8MA%3D%3D'
     },
     {
       title: 'Storage Solutions',
@@ -352,7 +352,7 @@ const sampleServices = {
       price: 200,
       rating: 4.5,
       reviews: 67,
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'
+      image: 'https://plus.unsplash.com/premium_photo-1661757829099-f8b61e232cfb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW92aW5nJTIwJTNBJTIwU3RvcmFnZSUyMFNvbHV0aW9uc3xlbnwwfHwwfHx8MA%3D%3D'
     }
   ]
 };
