@@ -1,4 +1,4 @@
-import { asyncHandler } from '../../shared/middleware/error.middleware.js';
+import { asyncHandler, BadRequestError } from '../../shared/middleware/error.middleware.js';
 import * as serviceService from './service.service.js';
 import Service from './service.model.js';
 import APIFeatures from '../../shared/utils/apiFeatures.js';
@@ -31,7 +31,23 @@ export const createService = asyncHandler(async (req, res) => {
  * GET /api/services
  */
 export const getAllServices = asyncHandler(async (req, res) => {
-  const features = new APIFeatures(Service.find(), req.query)
+  let query = {};
+  const queryObj = { ...req.query };
+
+  // Handle search query 'q' across multiple fields
+  if (queryObj.q) {
+    query.$or = [
+      { title: { $regex: queryObj.q, $options: 'i' } },
+      { description: { $regex: queryObj.q, $options: 'i' } },
+      { category: { $regex: queryObj.q, $options: 'i' } }
+    ];
+    
+    // Remove 'q' from queryObj so APIFeatures doesn't try to 
+    // filter by a literal field named 'q'
+    delete queryObj.q;
+  }
+
+  const features = new APIFeatures(Service.find(query), queryObj)
     .filter()
     .advancedFilter()
     .sort()

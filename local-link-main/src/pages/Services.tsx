@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Search, SlidersHorizontal, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -8,28 +8,48 @@ import ServiceCard from "@/components/ServiceCard";
 import { useServices, useCategories } from "@/hooks/use-services";
 
 const ServicesPage = () => {
-  const [searchParams] = useSearchParams();
-  const initialCategory = searchParams.get("category") || "";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const [query, setQuery] = useState(searchParams.get("q") || "");
+  const initialCategory = searchParams.get("category") || "";
+  const initialQuery = searchParams.get("q") || "";
+
+  const [query, setQuery] = useState(initialQuery);
+  const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+  // Debounce the search query to prevent focus loss and excessive API calls
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+      // Update URL parameters
+      const newParams = new URLSearchParams(searchParams);
+      if (query) newParams.set("q", query);
+      else newParams.delete("q");
+      setSearchParams(newParams, { replace: true });
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [query, setSearchParams, searchParams]);
+
+  // Handle category selection
+  const handleCategoryChange = (category: string) => {
+    const newCategory = category === selectedCategory ? "" : category;
+    setSelectedCategory(newCategory);
+    const newParams = new URLSearchParams(searchParams);
+    if (newCategory) newParams.set("category", newCategory);
+    else newParams.delete("category");
+    setSearchParams(newParams);
+  };
 
   const { data: services, isLoading, error } = useServices(
     selectedCategory || undefined,
-    query || undefined
+    debouncedQuery || undefined
   );
   const { data: categories, isLoading: categoriesLoading } = useCategories();
 
-  // Debug logging
-  console.log("=== SERVICES PAGE DEBUG ===");
-  console.log("isLoading:", isLoading);
-  console.log("error:", error);
-  console.log("services:", services);
-  console.log("categories:", categories);
-  console.log("categoriesLoading:", categoriesLoading);
-
-  // Show loading state
-  if (isLoading || categoriesLoading) {
+  // Show full-page loader only for the initial category load
+  if (categoriesLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -82,7 +102,7 @@ const ServicesPage = () => {
 
           <div className="flex flex-wrap gap-2 mb-10">
             <button
-              onClick={() => setSelectedCategory("")}
+              onClick={() => handleCategoryChange("")}
               className={`px-4 py-2 text-sm rounded-full border transition-colors ${!selectedCategory ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}
             >
               All
@@ -90,7 +110,7 @@ const ServicesPage = () => {
             {categories?.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.name === selectedCategory ? "" : cat.name)}
+                onClick={() => handleCategoryChange(cat.name)}
                 className={`px-4 py-2 text-sm rounded-full border transition-colors ${selectedCategory === cat.name ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}
               >
                 {cat.name}
